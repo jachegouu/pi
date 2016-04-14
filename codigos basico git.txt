@@ -1,0 +1,4 @@
+git add *                        "Adiciona todo os arquivo alterados"
+git commit -m "Comentario da alteração essecial para nao nos perdemos nas alteracoes colocar sempre a data e hora aki tb"
+git push origin master           "Atualiza projeto da sua alteracoes local para o remoto"
+git pull     "atualiza o local com remoto"
