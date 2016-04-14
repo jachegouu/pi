@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Já Chegou</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_senha">Senha</string>
+    <string name="entrar_registrar">Entrar ou Registrar</string>
+    <string name="entrar_curto">Entrar</string>
+    <string name="error_email_invalido">Este e-mail é inválido</string>
+    <string name="error_senha_invalida">Esta senha é muito curta!</string>
+    <string name="error_senha_incorreta">Esta senha esta incorreta</string>
+    <string name="error_campo_necessario">Este campo é obrigatorio</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="cadastar">Criar sua conta aqui !</string>
+
+    <string name="nome_cliente">Nome do Cliente</string>
+    <string name="telefone_cliente">Telefone do Cliente</string>
+    <string name="email_cliente">E-mail (Login)</string>
+    <string name="site_cliente">Site do Cliente</string>
+    <string name="endereco_cliente">Rua, Denominação, Referencia</string>
+    <string name="save_cliente">Salvar</string>
+    <string name="add_cliente">Adicionar Cliente</string>
+
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="site">Site</string>
+    <string name="rua">Rua :</string>
+    <string name="bairro">Bairro :</string>
+    <string name="numero">Numero :</string>
+    <string name="regiao">Região</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="title_activity_cadatro_usuario">CadatroUsuarioActivity</string>
+    <string name="title_activity_tela_principal">Faça seu pe... Ops, Já Chegou !</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
