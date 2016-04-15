@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -65,6 +66,7 @@ public class WebServiceLogin {
                     super.onPostExecute(s);
                     loading.dismiss();
                     setJsonString(s);
+                    Log.i("JSON",s);
                     if(s!=null) {
                         Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                         abirTelaPrincipal();
