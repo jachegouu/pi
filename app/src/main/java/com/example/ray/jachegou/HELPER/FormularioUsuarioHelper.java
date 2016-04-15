@@ -85,38 +85,40 @@ public class FormularioUsuarioHelper {
     }
 
     public void salvar(){
-        StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progress.cancel();
-                Toast.makeText(activity,"Cadastrado com sucesso !",Toast.LENGTH_LONG);
-                activity.finish();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activity,"Erro no servidor !",Toast.LENGTH_LONG);
-                activity.finish();
-            }
-        }){
+        if(validaCampos()==true) {
+            StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    progress.cancel();
+                    Toast.makeText(activity, "Cadastrado com sucesso !", Toast.LENGTH_LONG);
+                    activity.finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(activity, "Erro no servidor !", Toast.LENGTH_LONG);
+                    activity.finish();
+                }
+            }) {
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parameters  = new HashMap<String, String>();
-                parameters.put("nome",getUsuario().getNome());
-                parameters.put("telefone",getUsuario().getTelefone());
-                parameters.put("rua",getUsuario().getRua());
-                parameters.put("bairro",getUsuario().getBairro());
-                parameters.put("numero",getUsuario().getNumero().toString());
-                parameters.put("cep",getUsuario().getCep());
-                parameters.put("senha",getUsuario().getSenha());
-                parameters.put("email",getUsuario().getEmail());
-                parameters.put("imagem", BitMapToString(getBitmap()));
-                return parameters;
-            }
-        };
-        requestQueue.add(request);
-        progress=ProgressDialog.show(activity, "Aguarde ...", "Salvando Informações ...", true);
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<String, String>();
+                    parameters.put("nome", getUsuario().getNome());
+                    parameters.put("telefone", getUsuario().getTelefone());
+                    parameters.put("rua", getUsuario().getRua());
+                    parameters.put("bairro", getUsuario().getBairro());
+                    parameters.put("numero", getUsuario().getNumero().toString());
+                    parameters.put("cep", getUsuario().getCep());
+                    parameters.put("senha", getUsuario().getSenha());
+                    parameters.put("email", getUsuario().getEmail());
+                    parameters.put("imagem", BitMapToString(getBitmap()));
+                    return parameters;
+                }
+            };
+            requestQueue.add(request);
+            progress = ProgressDialog.show(activity, "Aguarde ...", "Salvando Informações ...", true);
+        }
     }
     public String BitMapToString(Bitmap bitmap){
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
@@ -139,5 +141,49 @@ public class FormularioUsuarioHelper {
 
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    public boolean validaCampos(){
+        nomeUsuario=(EditText)activity.findViewById(R.id.nomeCliente);
+        telefoneUsuario=(EditText)activity.findViewById(R.id.telefoneCliente);
+        bairroEndereco=(EditText)activity.findViewById(R.id.bairroCliente);
+        ruaEndereco=(EditText)activity.findViewById(R.id.ruaEndereco);
+        numeroEndereco=(EditText)activity.findViewById(R.id.numeroCliente);
+        cepEndereco=(EditText)activity.findViewById(R.id.cep);
+        emailUsuario=(EditText)activity.findViewById(R.id.emailCliente);
+        senhaUsuario=(EditText)activity.findViewById(R.id.senhaCliente);
+
+        if(nomeUsuario.getText()!=null && !nomeUsuario.getText().equals("")){
+            visualizaMensagem("Campo Nome Invalido, verifique !");
+            return false;
+        }else if(telefoneUsuario.getText()!=null && !telefoneUsuario.getText().equals("")) {
+            visualizaMensagem("Campo telefone Invalido, verifique !");
+            return false;
+        }else if(bairroEndereco.getText()!=null && !bairroEndereco.getText().equals("")) {
+            visualizaMensagem("Campo bairro Invalido, verifique !");
+            return false;
+        }else if(ruaEndereco.getText()!=null && !ruaEndereco.getText().equals("")) {
+            visualizaMensagem("Campo Rua Invalido, verifique !");
+            return false;
+        }else if(numeroEndereco.getText()!=null && !numeroEndereco.getText().equals("")) {
+            visualizaMensagem("Campo Endereço Invalido, verifique !");
+            return false;
+        }else if(cepEndereco.getText()!=null && !cepEndereco.getText().equals("")) {
+            visualizaMensagem("Campo CEP Invalido, verifique !");
+            return false;
+        }else if(emailUsuario.getText()!=null && !emailUsuario.getText().equals("")) {
+            visualizaMensagem("Campo e-mail Invalido, verifique !");
+            return false;
+        }else if(senhaUsuario.getText()!=null && !senhaUsuario.getText().equals("")) {
+            visualizaMensagem("Campo senha Invalido, verifique !");
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+
+    public void visualizaMensagem(String mensagem){
+        Toast.makeText(activity,mensagem,Toast.LENGTH_SHORT).show();
     }
 }
