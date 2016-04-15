@@ -30,9 +30,13 @@ import com.example.ray.jachegou.DAOS.Teste;
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
+import com.example.ray.jachegou.SERVICE.WebService;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -90,9 +94,13 @@ public class LoginActivity extends AppCompatActivity {
         redinirSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Teste teste= new Teste();
+                /*Teste teste= new Teste();
                 String retorno=teste.teste(requestQueue, emailEdit.getText().toString(), senhaEdit.getText().toString());
-                Toast.makeText(LoginActivity.this,retorno,Toast.LENGTH_LONG);
+                Toast.makeText(LoginActivity.this,retorno,Toast.LENGTH_LONG);*/
+                WebService teste= new WebService(LoginActivity.this);
+                teste.getJSON("http://widehaus.com/android/android.json");
+                //Toast.makeText(LoginActivity.this,teste.getJsonString(),Toast.LENGTH_LONG).show();
+                //Log.e("TESTE JSON",teste.getJsonString());
             }
         });
         botaoLogar.setOnClickListener(new View.OnClickListener() {
