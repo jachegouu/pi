@@ -2,9 +2,12 @@ package com.example.ray.jachegou.SERVICE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.ray.jachegou.TelaPrincipal;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,27 +17,28 @@ import java.net.URL;
 /**
  * Created by Ray-PC on 15/04/2016.
  */
-public class WebService {
+public class WebServiceLogin {
         private Button buttonGet;
         private Button buttonParse;
         private Activity activity;
         private String jsonString;
 
-        public WebService(Activity activity){
-                this.activity=activity;
+        private static  String MY_JSON = "MY_JSON";
+        private static  String url_Servidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/login.php";
+
+        public WebServiceLogin(String email, String senha,Activity activity){
+           url_Servidor=url_Servidor+"?email_usuario="+email+"&senha_usuario="+senha;
+            this.activity=activity;
         }
-        public static final String MY_JSON = "MY_JSON";
-        private static final String JSON_URL = "http://widehaus.com/android/android.json";
 
-
-        public void getJSON(String jsonUrl) {
+        public void logarUsuario() {
             class GetJSON extends AsyncTask<String, Void, String> {
                 ProgressDialog loading;
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    loading = ProgressDialog.show(activity, "Carregando informações...", null);
+                    loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
                 }
 
                 @Override
@@ -61,12 +65,17 @@ public class WebService {
                     super.onPostExecute(s);
                     loading.dismiss();
                     setJsonString(s);
-                    Toast.makeText(activity,s,Toast.LENGTH_SHORT).show();
+                    if(s!=null) {
+                        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+                        abirTelaPrincipal();
+                    }else{
+                        Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             GetJSON gj = new GetJSON();
-            gj.execute(jsonUrl);
+            gj.execute(url_Servidor);
         }
 
     public String getJsonString() {
@@ -75,6 +84,11 @@ public class WebService {
 
     public void setJsonString(String jsonString) {
         this.jsonString = jsonString;
+    }
+
+    public void abirTelaPrincipal(){
+        Intent intent= new Intent(activity, TelaPrincipal.class);
+        activity.startActivity(intent);
     }
 }
 

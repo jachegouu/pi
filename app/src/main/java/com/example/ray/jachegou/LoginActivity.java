@@ -31,6 +31,7 @@ import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.SERVICE.WebService;
+import com.example.ray.jachegou.SERVICE.WebServiceLogin;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -108,7 +109,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
                         && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
-                    loginHelper.autenticarUsuario2();
+                    //loginHelper.autenticarUsuario2();
+                    WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),LoginActivity.this);
+                    login.logarUsuario();
                 }else{
                     Toast.makeText(LoginActivity.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
                 }
