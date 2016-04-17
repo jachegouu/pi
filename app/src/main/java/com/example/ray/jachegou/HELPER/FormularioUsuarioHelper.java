@@ -62,7 +62,7 @@ public class FormularioUsuarioHelper {
          telefoneUsuario.setText(usuario.getTelefone());
          bairroEndereco.setText(usuario.getBairro());
          ruaEndereco.setText(usuario.getRua());
-         numeroEndereco.setText(usuario.getNumero().toString());
+         //numeroEndereco.setText(usuario.getNumero().toString());
          cepEndereco.setText(usuario.getCep());
          emailUsuario.setText(usuario.getEmail());
          senhaUsuario.setText(usuario.getSenha());

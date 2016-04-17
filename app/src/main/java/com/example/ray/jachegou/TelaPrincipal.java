@@ -58,13 +58,13 @@ public class TelaPrincipal extends AppCompatActivity
         seekUm.setProgress(0);
         seekUm.setMax(100);
 
-        nomeCliente=(TextView)findViewById(R.id.nomeTexviewCliente);
-        imagemCliente=(ImageView)findViewById(R.id.testeImageView);
+        //nomeCliente=(TextView)findViewById(R.id.nomeTexviewCliente);
+        //imagemCliente=(ImageView)findViewById(R.id.testeImageView);
 
         if(UsuarioHelper.usuarioLogado!=null){
-            nomeCliente.setText(UsuarioHelper.usuarioLogado.getNome());
+          //  nomeCliente.setText(UsuarioHelper.usuarioLogado.getNome());
             //imagemCliente.setImageDrawable(UsuarioHelper.usuarioLogado.getImagem());
-            imagemCliente.setImageBitmap(UsuarioHelper.usuarioLogado.getBitmap());
+            //imagemCliente.setImageBitmap(UsuarioHelper.usuarioLogado.getBitmap());
         }
 
 

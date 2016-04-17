@@ -5,18 +5,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ray.jachegou.HELPER.UsuarioHelper;
+import com.example.ray.jachegou.AdapterListView;
+import com.example.ray.jachegou.ListaProdutos;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
-import com.example.ray.jachegou.MODELS.UsuarioBean;
-import com.example.ray.jachegou.TelaPrincipal;
+import com.example.ray.jachegou.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,28 +36,30 @@ import java.util.List;
 /**
  * Created by Ray-PC on 15/04/2016.
  */
-public class WebServiceLogin {
-        private Button buttonGet;
-        private Button buttonParse;
+public class WebServiceListaProduto {
         private Activity activity;
         private String jsonString;
+        private ListView listView;
+        private AdapterListView adapterListView;
+        private ArrayList<ProdutoBean> itens;
 
         private static  String MY_JSON = "MY_JSON";
-        private static  String url_Servidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/login.php";
+        private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
 
-        public WebServiceLogin(String email, String senha,Activity activity){
-           url_Servidor=url_Servidor+"?email_usuario="+email+"&senha_usuario="+senha;
+        public WebServiceListaProduto(Activity activity){
+            url_Servidor=url_Servidor;
             this.activity=activity;
+            listView=(ListView)activity.findViewById(R.id.listaProdutosListView);
         }
 
-        public void logarUsuario() {
+        public void listaProdutos() {
             class GetJSON extends AsyncTask<String, Void, String> {
                 ProgressDialog loading;
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
+                    loading = ProgressDialog.show(activity, "Consultando produtos ...", null);
                 }
 
                 @Override
@@ -81,14 +84,12 @@ public class WebServiceLogin {
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
-                    loading.dismiss();
-                    setJsonString(s);
-                    Log.i("JSON",s);
+                    Log.i("JSON", s);
                     if(s!=null) {
                         //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
-                        UsuarioBean usuario=getUsuarioJson(s);
-                        UsuarioHelper.usuarioLogado=usuario;
-                        abirTelaPrincipal();
+                        List<ProdutoBean> lista=getListaProdutos(s);
+                        createListView(lista);
+                        loading.dismiss();
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
                     }
@@ -99,43 +100,35 @@ public class WebServiceLogin {
             gj.execute(url_Servidor);
         }
 
-    public String getJsonString() {
-        return jsonString;
-    }
-
-    public void setJsonString(String jsonString) {
-        this.jsonString = jsonString;
-    }
-
-    public void abirTelaPrincipal(){
-        Intent intent= new Intent(activity, TelaPrincipal.class);
-        activity.startActivity(intent);
-    }
-
-    private UsuarioBean getUsuarioJson(String jsonString) {
-        UsuarioBean bean=new UsuarioBean();
+    private List<ProdutoBean> getListaProdutos(String jsonString) {
+        List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
         try {
+            JSONArray pessoasJson = new JSONArray(jsonString);
+            JSONObject produtoJson;
 
-            JSONObject usuarioJson= new JSONObject(jsonString);
-            bean.setId(Integer.parseInt(usuarioJson.getString("id")));
-            bean.setNome(usuarioJson.getString("nome"));
-            bean.setTelefone(usuarioJson.getString("telefone"));
-            bean.setBairro(usuarioJson.getString("bairro"));
-            bean.setRua(usuarioJson.getString("rua"));
-            bean.setNumero(Integer.parseInt(usuarioJson.getString("numero")));
-            bean.setCep(usuarioJson.getString("cep"));
-            bean.setEmail(usuarioJson.getString("email"));
-            bean.setSenha(usuarioJson.getString("senha"));
-
-            bean.setImagem(carregarImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/imagem_cliente/"+usuarioJson.getString("path_imagen")));
+            for (int i = 0; i < pessoasJson.length(); i++) {
+                produtoJson = new JSONObject(pessoasJson.getString(i));
+                ProdutoBean produtoBean=new ProdutoBean();
+                produtoBean.setDescricao(produtoJson.getString("descricao"));
+                produtoBean.setValor(produtoJson.getDouble("valor"));
+                produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
+                Log.i("URL_IMAGEM:","http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
+                produtos.add(produtoBean);
+            }
 
         } catch (JSONException e) {
             Log.e("Erro", "Erro no parsing do JSON", e);
         }
-        return bean;
+        return produtos;
     }
 
-    public Drawable carregarImagem(String url) {
+    private void createListView(List<ProdutoBean> lista) {
+        adapterListView = new AdapterListView(activity.getApplicationContext(), lista);
+        listView.setAdapter(adapterListView);
+        listView.setCacheColorHint(Color.TRANSPARENT);
+    }
+
+    public Drawable carregarImagemProduto(String url) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -172,4 +165,3 @@ public class WebServiceLogin {
         }
     }
 }
-

@@ -81,61 +81,6 @@ public class UsuarioWebServiceDAO extends Application{
         return retorno;
     }
 
-
-
-
-    public void loginUsuario(final UsuarioBean usuarioBean, final LoginActivity login){
-        StringRequest request = new StringRequest(Request.Method.POST, loginUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(login,response, Toast.LENGTH_LONG).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(login,error.toString(), Toast.LENGTH_LONG).show();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parameters  = new HashMap<String, String>();                
-                parameters.put("email",usuarioBean.getEmail());
-                parameters.put("senha", usuarioBean.getSenha());
-                return parameters;
-            }
-        };
-        requestQueue.add(request);
-    }
-
-
-    
-    public void logarUsuario(final String email, final String senha){
-        System.out.print(email);
-        StringRequest request = new StringRequest(Request.Method.POST, loginUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //retorno= Boolean.valueOf(response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parameters  = new HashMap<String, String>();
-                parameters.put("email",email);
-                parameters.put("senha",senha);
-                return parameters;
-            }
-        };
-        requestQueue.add(request);
-    }
-
-
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -150,9 +95,6 @@ public class UsuarioWebServiceDAO extends Application{
         String temp=Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
-
-
-
 
 }
 

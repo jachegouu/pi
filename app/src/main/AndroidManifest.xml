@@ -41,8 +41,11 @@
             android:label="@string/title_activity_tela_principal"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ListaProdutos" />
-        <activity android:name=".InformacoesProduto"></activity>
+        <activity android:name=".InformacoesProduto" />
+        <activity
+            android:name=".ListaProdutos"
+            android:label="@string/title_activity_lista_produtos"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -10,16 +10,20 @@ import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.example.ray.jachegou.MODELS.ProdutoBean;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ray-PC on 29/03/2016.
  */
 public class AdapterListView extends BaseAdapter {
     private LayoutInflater mInflater;
-    private ArrayList<ItemList> itens;
+    private List<ProdutoBean> itens;
 
-    public AdapterListView(Context context, ArrayList<ItemList> itens)
+    public AdapterListView(Context context, List<ProdutoBean> itens)
     {
         //Itens que preencheram o listview
         this.itens = itens;
@@ -43,7 +47,7 @@ public class AdapterListView extends BaseAdapter {
      * @param position
      * @return
      */
-    public ItemList getItem(int position)
+    public ProdutoBean getItem(int position)
     {
         return itens.get(position);
     }
@@ -62,15 +66,15 @@ public class AdapterListView extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent)
     {
 
-        ItemList item = itens.get(position);
+        ProdutoBean item = itens.get(position);
         //infla o layout para podermos preencher os dados
         view = mInflater.inflate(R.layout.item, null);
         //atravez do layout pego pelo LayoutInflater, pegamos cada id relacionado
         //ao item e definimos as informações.
 
-        ((TextView) view.findViewById(R.id.text)).setText(item.getNomeProduto());
-        ((TextView) view.findViewById(R.id.valor)).setText(item.getValorProduto());
-        ((ImageView) view.findViewById(R.id.imagemview)).setImageResource(item.getIconeRid());
+        ((TextView) view.findViewById(R.id.text)).setText(item.getDescricao());
+        ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getValor()));
+        ((ImageView) view.findViewById(R.id.imagemview)).setImageDrawable(item.getImagem());
 
 
         return view;

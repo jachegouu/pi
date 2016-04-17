@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/menuPrincipalFinalizarPedidos"
+            android:icon="@drawable/pedidos"
+            android:title="Finalizar Pedido" />
+        <item
             android:id="@+id/menuPrincipalVerPedidos"
             android:icon="@drawable/pedidos"
             android:title="Ver Pedidos" />
@@ -14,5 +18,6 @@
             android:id="@+id/menuPrincipalSair"
             android:title="Sair" />
     </group>
+
 
 </menu>

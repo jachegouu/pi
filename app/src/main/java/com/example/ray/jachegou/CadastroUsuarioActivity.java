@@ -19,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.ray.jachegou.DAOS.UsuarioWebServiceDAO;
 import com.example.ray.jachegou.HELPER.FormularioUsuarioHelper;
+import com.example.ray.jachegou.HELPER.UsuarioHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.google.android.gms.appindexing.Thing;
 
@@ -39,6 +40,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         imagemUsuario=(ImageView)findViewById(R.id.cadastroFotoUsuario);
         helper=new FormularioUsuarioHelper(this);
+        if(UsuarioHelper.usuarioLogado!=null){
+            helper.setUsuario(UsuarioHelper.usuarioLogado);
+        }
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
