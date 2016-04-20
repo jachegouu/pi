@@ -108,7 +108,7 @@ public class WebServiceListaProduto {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                //loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
+                loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
             }
 
             @Override
@@ -138,7 +138,7 @@ public class WebServiceListaProduto {
                     //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                     List<ProdutoBean> lista=getListaProdutos(s);
                     adicionar(lista);
-                    //loading.dismiss();
+                    loading.dismiss();
                     setQueringIsRuning(false);
                 }else{
                     Toast.makeText(activity, "Error ao tentar adicionar produtos", Toast.LENGTH_SHORT).show();
