@@ -2,7 +2,6 @@ package com.example.ray.jachegou.SERVICE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ray.jachegou.AdapterListView;
-import com.example.ray.jachegou.ListaProdutos;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
 
@@ -109,6 +107,7 @@ public class WebServiceListaProduto {
             for (int i = 0; i < pessoasJson.length(); i++) {
                 produtoJson = new JSONObject(pessoasJson.getString(i));
                 ProdutoBean produtoBean=new ProdutoBean();
+                produtoBean.setId(produtoJson.getInt("id"));
                 produtoBean.setDescricao(produtoJson.getString("descricao"));
                 produtoBean.setValor(produtoJson.getDouble("valor"));
                 produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
@@ -123,8 +122,8 @@ public class WebServiceListaProduto {
     }
 
     private void createListView(List<ProdutoBean> lista) {
-        adapterListView = new AdapterListView(activity.getApplicationContext(), lista);
-        listView.setAdapter(adapterListView);
+        setAdapterListView(new AdapterListView(activity.getApplicationContext(), lista));
+        listView.setAdapter(getAdapterListView());
         listView.setCacheColorHint(Color.TRANSPARENT);
     }
 
@@ -141,8 +140,7 @@ public class WebServiceListaProduto {
             e.printStackTrace();
         }
 
-        try
-        {
+        try{
             HttpURLConnection conn= (HttpURLConnection)myfileurl.openConnection();
             conn.setDoInput(true);
             conn.connect();
@@ -163,5 +161,13 @@ public class WebServiceListaProduto {
 //          Toast.makeText(PhotoRating.this, "Connection Problem. Try Again.", Toast.LENGTH_SHORT).show();
             return imagem;
         }
+    }
+
+    public AdapterListView getAdapterListView() {
+        return adapterListView;
+    }
+
+    public void setAdapterListView(AdapterListView adapterListView) {
+        this.adapterListView = adapterListView;
     }
 }

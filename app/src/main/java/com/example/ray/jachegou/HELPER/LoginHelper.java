@@ -6,16 +6,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -23,7 +20,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.LoginActivity;
@@ -34,9 +30,6 @@ import com.example.ray.jachegou.TelaPrincipal;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -93,7 +86,7 @@ public class LoginHelper {
                             usuario.setBitmap(downloadImg("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + obj.getString("path_imagen")));
                             Log.e("URL:","http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + obj.getString("path_imagen"));
                             Intent intent = new Intent(activity,TelaPrincipal.class);
-                            UsuarioHelper.usuarioLogado=usuario;
+                            ItemStaticos.usuarioLogado=usuario;
                             activity.startActivity(intent);
                             activity.finish();
                         }

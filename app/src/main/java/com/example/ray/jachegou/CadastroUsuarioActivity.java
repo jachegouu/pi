@@ -1,11 +1,8 @@
 package com.example.ray.jachegou;
 
-import android.app.Application;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -13,15 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.example.ray.jachegou.DAOS.UsuarioWebServiceDAO;
 import com.example.ray.jachegou.HELPER.FormularioUsuarioHelper;
-import com.example.ray.jachegou.HELPER.UsuarioHelper;
-import com.example.ray.jachegou.MODELS.UsuarioBean;
-import com.google.android.gms.appindexing.Thing;
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
     private Button btSalvar,btCancelar;
@@ -40,8 +33,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         imagemUsuario=(ImageView)findViewById(R.id.cadastroFotoUsuario);
         helper=new FormularioUsuarioHelper(this);
-        if(UsuarioHelper.usuarioLogado!=null){
-            helper.setUsuario(UsuarioHelper.usuarioLogado);
+        if(ItemStaticos.usuarioLogado!=null){
+            helper.setUsuario(ItemStaticos.usuarioLogado);
         }
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override

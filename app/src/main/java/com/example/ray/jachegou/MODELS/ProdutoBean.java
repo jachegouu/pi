@@ -2,15 +2,18 @@ package com.example.ray.jachegou.MODELS;
 
 import android.graphics.drawable.Drawable;
 
+import java.io.Serializable;
+
 /**
  * Created by Ray on 17/04/2016.
  */
-public class ProdutoBean {
+public class ProdutoBean implements Serializable{
     private Integer id;
     private String descricao;
     private String categoria;
     private Double valor;
     private Drawable imagem;
+    private Integer quantidadePedido;
 
     public Integer getId() {
         return id;
@@ -50,5 +53,14 @@ public class ProdutoBean {
 
     public void setImagem(Drawable imagem) {
         this.imagem = imagem;
+    }
+
+
+    public Integer getQuantidadePedido() {
+        return quantidadePedido;
+    }
+
+    public void setQuantidadePedido(Integer quantidadePedido) {
+        this.quantidadePedido = quantidadePedido;
     }
 }

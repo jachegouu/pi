@@ -13,12 +13,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.ray.jachegou.HELPER.UsuarioHelper;
-import com.example.ray.jachegou.MODELS.ProdutoBean;
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.TelaPrincipal;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,8 +27,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ray-PC on 15/04/2016.
@@ -87,7 +83,7 @@ public class WebServiceLogin {
                     if(s!=null) {
                         //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                         UsuarioBean usuario=getUsuarioJson(s);
-                        UsuarioHelper.usuarioLogado=usuario;
+                        ItemStaticos.usuarioLogado=usuario;
                         abirTelaPrincipal();
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();

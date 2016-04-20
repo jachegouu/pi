@@ -15,10 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.SERVICE.WebServiceListaProduto;
 
@@ -29,11 +33,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaProdutos extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
+public class ListaProdutos extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
 
     private Button diminuirQts, aumentarQts;
     private TextView qts;
     private Integer valorTextview;
+    private ListView listView;
+    private WebServiceListaProduto listar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +47,7 @@ public class ListaProdutos extends AppCompatActivity   implements NavigationView
         setContentView(R.layout.activity_lista_produtos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        listView=(ListView)findViewById(R.id.listaProdutosListView);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -51,8 +57,9 @@ public class ListaProdutos extends AppCompatActivity   implements NavigationView
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        WebServiceListaProduto listar = new WebServiceListaProduto(this);
+        listar = new WebServiceListaProduto(this);
         listar.listaProdutos();
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -106,5 +113,11 @@ public class ListaProdutos extends AppCompatActivity   implements NavigationView
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3){
+        ProdutoBean item = (ProdutoBean)listView.getAdapter().getItem(arg2);
+        Intent intent=new Intent(ListaProdutos.this,InformacoesProduto.class);
+        //intent.putExtra("produto",item);
+        ItemStaticos.produtoTela=item;
+        startActivity(intent);
+    }
 }

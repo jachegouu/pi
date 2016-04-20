@@ -79,4 +79,5 @@ public class AdapterListView extends BaseAdapter {
 
         return view;
     }
+
 }
