@@ -40,6 +40,7 @@ public class WebServiceListaProduto {
         private ListView listView;
         private AdapterListView adapterListView;
         private ArrayList<ProdutoBean> itens;
+        private List<ProdutoBean> listaProdutos;
 
         private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
@@ -85,8 +86,8 @@ public class WebServiceListaProduto {
                     Log.i("JSON", s);
                     if(s!=null) {
                         //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
-                        List<ProdutoBean> lista=getListaProdutos(s);
-                        createListView(lista);
+                        listaProdutos=getListaProdutos(s);
+                        createListView();
                         loading.dismiss();
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
@@ -97,7 +98,53 @@ public class WebServiceListaProduto {
             GetJSON gj = new GetJSON();
             gj.execute(url_Servidor);
         }
+    public void carregarMaisProdutos() {
+        class GetJSON extends AsyncTask<String, Void, String> {
+            ProgressDialog loading;
 
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String uri = params[0];
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    bufferedReader = new BufferedReader((new InputStreamReader(con.getInputStream())));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Log.i("JSON", s);
+                if(s!=null) {
+                    //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+                    List<ProdutoBean> lista=getListaProdutos(s);
+                    adicionar(lista);
+                    loading.dismiss();
+                }else{
+                    Toast.makeText(activity, "Error ao tentar adicionar produtos", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        GetJSON gj = new GetJSON();
+        gj.execute(url_Servidor);
+    }
     private List<ProdutoBean> getListaProdutos(String jsonString) {
         List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
         try {
@@ -121,12 +168,17 @@ public class WebServiceListaProduto {
         return produtos;
     }
 
-    private void createListView(List<ProdutoBean> lista) {
-        setAdapterListView(new AdapterListView(activity.getApplicationContext(), lista));
+    private void createListView() {
+        setAdapterListView(new AdapterListView(activity.getApplicationContext(), listaProdutos));
         listView.setAdapter(getAdapterListView());
         listView.setCacheColorHint(Color.TRANSPARENT);
     }
-
+    private void adicionar(List<ProdutoBean> lista) {
+        for(ProdutoBean p:lista){
+            listaProdutos.add(p);
+        }
+        adapterListView.notifyDataSetChanged();
+    }
     public Drawable carregarImagemProduto(String url) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

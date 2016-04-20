@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jricardo.cadastrocliente.FormularioActivity"
-    android:background="#1874CD">
+    tools:context="com.example.ray.jachegou.CadastroUsuarioActivity"
+    android:background="#1874CD"
+    android:screenOrientation="portrait">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,11 +40,12 @@
         android:textSize="30dp"
         android:textColor="@android:color/white"
         android:textAlignment="center"/>
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:id="@+id/categoriaPesquisar"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -51,11 +53,12 @@
         android:textSize="30dp"
         android:textColor="@android:color/white"
         android:textAlignment="center"/>
-    <EditText
+    <AutoCompleteTextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="25dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:id="@+id/estabelecimentosEdit"/>
      <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -11,14 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
+import com.example.ray.jachegou.SERVICE.WebServiceTelaPrincipal;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +33,8 @@ public class TelaPrincipal extends AppCompatActivity
     private Button btnConsultar;
     private TextView nomeCliente;
     private ImageView imagemCliente;
+    private AutoCompleteTextView categoriaEdit;
+    private ArrayAdapter<String> categorias;
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -35,6 +42,7 @@ public class TelaPrincipal extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal);
 
+        categoriaEdit=(AutoCompleteTextView)findViewById(R.id.categoriaPesquisar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -89,8 +97,8 @@ public class TelaPrincipal extends AppCompatActivity
             }
         });
 
-
-
+        WebServiceTelaPrincipal tela=new WebServiceTelaPrincipal(this);
+        tela.CarregarTela();
     }
 
     @Override

@@ -11,7 +11,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.ray.jachegou.ListaProdutos"
     tools:showIn="@layout/app_bar_lista_produtos"
-    android:background="#1874CD">
+    android:background="#1874CD"
+    android:screenOrientation="portrait">
 
     <ListView
         android:layout_width="fill_parent"
