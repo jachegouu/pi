@@ -41,6 +41,7 @@ public class WebServiceListaProduto {
         private AdapterListView adapterListView;
         private ArrayList<ProdutoBean> itens;
         private List<ProdutoBean> listaProdutos;
+        private boolean queringIsRuning=false;
 
         private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
@@ -89,6 +90,7 @@ public class WebServiceListaProduto {
                         listaProdutos=getListaProdutos(s);
                         createListView();
                         loading.dismiss();
+                        setQueringIsRuning(false);
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
                     }
@@ -97,6 +99,7 @@ public class WebServiceListaProduto {
 
             GetJSON gj = new GetJSON();
             gj.execute(url_Servidor);
+            setQueringIsRuning(true);
         }
     public void carregarMaisProdutos() {
         class GetJSON extends AsyncTask<String, Void, String> {
@@ -105,7 +108,7 @@ public class WebServiceListaProduto {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
+                //loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
             }
 
             @Override
@@ -135,7 +138,8 @@ public class WebServiceListaProduto {
                     //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                     List<ProdutoBean> lista=getListaProdutos(s);
                     adicionar(lista);
-                    loading.dismiss();
+                    //loading.dismiss();
+                    setQueringIsRuning(false);
                 }else{
                     Toast.makeText(activity, "Error ao tentar adicionar produtos", Toast.LENGTH_SHORT).show();
                 }
@@ -144,7 +148,9 @@ public class WebServiceListaProduto {
 
         GetJSON gj = new GetJSON();
         gj.execute(url_Servidor);
+        setQueringIsRuning(true);
     }
+
     private List<ProdutoBean> getListaProdutos(String jsonString) {
         List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
         try {
@@ -221,5 +227,13 @@ public class WebServiceListaProduto {
 
     public void setAdapterListView(AdapterListView adapterListView) {
         this.adapterListView = adapterListView;
+    }
+
+    public boolean isQueringIsRuning() {
+        return queringIsRuning;
+    }
+
+    public void setQueringIsRuning(boolean queringIsRuning) {
+        this.queringIsRuning = queringIsRuning;
     }
 }

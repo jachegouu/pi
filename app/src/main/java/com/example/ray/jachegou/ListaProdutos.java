@@ -57,8 +57,10 @@ public class ListaProdutos extends AppCompatActivity   implements NavigationView
 
             @Override
             public void onScroll(AbsListView view, int primeiroItemVisivel, int totalItemVisivel, int totalItem) {
-                if((primeiroItemVisivel+totalItemVisivel)==totalItem && totalItem!=0){
-                    listar.carregarMaisProdutos();
+                if((primeiroItemVisivel+totalItemVisivel)==totalItem){
+                    if(listar.isQueringIsRuning()==false) {
+                        listar.carregarMaisProdutos();
+                    }
                 }
             }
         });
