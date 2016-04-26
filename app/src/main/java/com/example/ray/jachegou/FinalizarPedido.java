@@ -28,7 +28,8 @@ public class FinalizarPedido extends AppCompatActivity {
         cancelar=(Button)findViewById(R.id.btnCancelarPedido);
         valorTotal=(TextView)findViewById(R.id.txValorTotalPedido);
 
-        AdapterListView adapterListView = new AdapterListView(this.getApplicationContext(), ItemStaticos.listaProdutosPedidos);
+        AdapterListView adapterListView = new AdapterListView(this.getApplicationContext(), ItemStaticos.listaProdutosPedidos,1);
+
         for(ProdutoBean produto:ItemStaticos.listaProdutosPedidos ){
             valor=valor+(produto.getValor()*produto.getQuantidadePedido());
         }

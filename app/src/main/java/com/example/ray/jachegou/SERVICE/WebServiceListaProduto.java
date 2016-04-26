@@ -179,7 +179,7 @@ public class WebServiceListaProduto {
     }
 
     private void createListView() {
-        setAdapterListView(new AdapterListView(activity.getApplicationContext(), listaProdutos));
+        setAdapterListView(new AdapterListView(activity.getApplicationContext(), listaProdutos,0));
         listView.setAdapter(getAdapterListView());
         listView.setCacheColorHint(Color.TRANSPARENT);
     }

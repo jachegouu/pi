@@ -24,12 +24,13 @@ public class AdapterListView extends BaseAdapter {
     private List<ProdutoBean> itens;
     private Integer modelo=0;
 
-    public AdapterListView(Context context, List<ProdutoBean> itens)
+    public AdapterListView(Context context, List<ProdutoBean> itens,int modelo)
     {
         //Itens que preencheram o listview
         this.itens = itens;
         //responsavel por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
+        this.modelo=modelo;
     }
 
     /**
@@ -74,9 +75,9 @@ public class AdapterListView extends BaseAdapter {
         //ao item e definimos as informações.
 
         ((TextView) view.findViewById(R.id.text)).setText(item.getDescricao());
-        if(modelo==1) {
+        if(modelo==0) {
             ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getValor()));
-        }else if(modelo==2){
+        }else if(modelo==1){
             ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getQuantidadePedido() + " x "+item.getValor()));
         }
         ((ImageView) view.findViewById(R.id.imagemview)).setImageDrawable(item.getImagem());
