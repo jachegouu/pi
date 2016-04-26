@@ -17,7 +17,7 @@ public class FinalizarPedido extends AppCompatActivity {
     private Button finalizar;
     private Button cancelar;
     private TextView valorTotal;
-    private Double valor;
+    private Double valor=0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

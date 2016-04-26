@@ -22,6 +22,7 @@ import java.util.List;
 public class AdapterListView extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<ProdutoBean> itens;
+    private Integer modelo=0;
 
     public AdapterListView(Context context, List<ProdutoBean> itens)
     {
@@ -73,7 +74,11 @@ public class AdapterListView extends BaseAdapter {
         //ao item e definimos as informações.
 
         ((TextView) view.findViewById(R.id.text)).setText(item.getDescricao());
-        ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getValor()));
+        if(modelo==1) {
+            ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getValor()));
+        }else if(modelo==2){
+            ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getQuantidadePedido() + " x "+item.getValor()));
+        }
         ((ImageView) view.findViewById(R.id.imagemview)).setImageDrawable(item.getImagem());
 
 
