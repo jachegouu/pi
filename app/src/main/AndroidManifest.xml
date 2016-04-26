@@ -31,9 +31,15 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".VizualizarProduto" />
-        <activity android:name=".TelaPrincipalControler" />
-        <activity android:name=".FinalizarPedido"></activity>
+        <activity android:name=".VizualizarProduto"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TelaPrincipalControler"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".FinalizarPedido"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
