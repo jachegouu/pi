@@ -69,7 +69,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     fragmentTransaction.commit();
                     break;
                 case 3:
-
+                    Intent intent3 = new Intent(this.context,FinalizarPedido.class);
+                    this.context.startActivity(intent3);
                     break;
                 case 4:
                     Intent intent2 = new Intent(this.context,LoginActivity.class);

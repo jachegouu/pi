@@ -38,7 +38,7 @@ public class InformacoesProduto extends AppCompatActivity {
         btnContinuar=(Button)findViewById(R.id.btnContinuar);
         btnFechar=(Button)findViewById(R.id.btnFechar);
         quantidade=(TextView)findViewById(R.id.qtsPedido);
-        txtIngrediente=(TextView)findViewById(R.id.textIngredientes);
+        //txtIngrediente=(TextView)findViewById(R.id.textIngredientes);
 
         produto= ItemStaticos.produtoTela;
 
