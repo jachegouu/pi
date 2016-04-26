@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.ray.jachegou.CadastroUsuarioActivity"
-    android:background="@android:color/white">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,9 +11,17 @@
     android:orientation="vertical">
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="400dp"
         android:id="@+id/listaViewFinalizar">
     </ListView>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txValorTotalPedido"
+        android:textSize="25dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:text="VALOR TOTAL: R$ 0,00"
+        android:textAlignment="center"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -43,4 +45,3 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"/>
 </LinearLayout>
-</ScrollView>
