@@ -21,7 +21,6 @@ public class UsuarioBean implements Serializable {
     private String pathImagem;
     private Bitmap bitmap;
     private Drawable imagem;
-    private Bitmap bitmapImg;
 
     public Integer getId() {
         return id;

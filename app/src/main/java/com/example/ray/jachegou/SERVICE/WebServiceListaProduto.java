@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ray.jachegou.AdapterListView;
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
 
@@ -45,6 +46,7 @@ public class WebServiceListaProduto {
 
         private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
+
 
         public WebServiceListaProduto(Activity activity){
             url_Servidor=url_Servidor;
@@ -98,6 +100,7 @@ public class WebServiceListaProduto {
             }
 
             GetJSON gj = new GetJSON();
+            Log.i("URL:",montarUrlPesquisa());
             gj.execute(url_Servidor);
             setQueringIsRuning(true);
         }
@@ -147,6 +150,7 @@ public class WebServiceListaProduto {
         }
 
         GetJSON gj = new GetJSON();
+        //Log.i("URL:",montarUrlPesquisa());
         gj.execute(url_Servidor);
         setQueringIsRuning(true);
     }
@@ -235,5 +239,13 @@ public class WebServiceListaProduto {
 
     public void setQueringIsRuning(boolean queringIsRuning) {
         this.queringIsRuning = queringIsRuning;
+    }
+
+    public String montarUrlPesquisa(){
+        return  url_Servidor=url_Servidor+
+                "?categoria="+((ItemStaticos.filtro.getDescricaoCategoria()==null)?0:ItemStaticos.filtro.getDescricaoCategoria())+
+                "&estabelicimento="+((ItemStaticos.filtro.getDescricaoEstabelecimento()==null)?0:ItemStaticos.filtro.getDescricaoEstabelecimento())+
+                "&valor="+((ItemStaticos.filtro.getValor()==null)?0.0:ItemStaticos.filtro.getValor())+
+                "&descricao="+ItemStaticos.filtro.getDescricaoProduto();
     }
 }

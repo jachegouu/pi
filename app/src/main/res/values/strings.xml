@@ -45,4 +45,22 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_lista_produtos">ListaProdutos</string>
+
+
+    <string-array name="navDrawerItems">
+        <item>Alterar Meus Dados</item>
+        <item>Utimos Pedidos</item>
+        <item>Fechar Pedido</item>
+        <item>Sair</item>
+    </string-array>
+
+    <string-array name="navDrawerIcons">
+        <item>@drawable/item1</item>
+        <item>@drawable/item2</item>
+        <item>@drawable/item3</item>
+        <item>@drawable/item4</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

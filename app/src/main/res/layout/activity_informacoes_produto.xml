@@ -10,7 +10,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1874CD">
+    android:background="#1874CD"
+    android:padding="5dp">
     <TextView
         android:id="@+id/nomeProdutoInf"
         android:layout_width="fill_parent"
@@ -26,11 +27,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="5sp"
-        android:id="@+id/teste">
+        android:id="@+id/teste"
+        android:layout_margin="0dp">
         <ImageView
             android:id="@+id/imagemViewInf"
             android:layout_width="fill_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             android:src="@drawable/img1"
             android:padding="0dp"
             android:layout_margin="0dp"/>
@@ -44,16 +46,6 @@
             android:textAlignment="center"
             android:textStyle="bold"
             android:fontFamily="Timer new Rome"/>
-        <TextView
-            android:id="@+id/textIngredientes"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="20dp"
-            android:text=""
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:fontFamily="Timer new Rome"/>
 
     </LinearLayout>
     <LinearLayout
@@ -61,10 +53,11 @@
         android:layout_height="wrap_content" >
         <Button
             android:id="@+id/btnAumentar"
-            android:layout_width="94dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="+"
-            android:textSize="25dp"
+            android:textSize="45dp"
             android:textStyle="bold"
             android:fontFamily="Timer new Rome"
             android:background="#104E8B"
@@ -72,7 +65,8 @@
             android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/qtsPedido"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text=""
             android:textSize="40dp"
@@ -82,10 +76,11 @@
             android:textColor="@android:color/white"/>
         <Button
             android:id="@+id/btnDiminuir"
-            android:layout_width="94dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="-"
-            android:textSize="25dp"
+            android:textSize="45dp"
             android:textStyle="bold"
             android:fontFamily="Timer new Rome"
             android:background="#104E8B"
@@ -101,7 +96,8 @@
         android:textSize="20dp"
         android:background="#104E8B"
         android:id="@+id/btnContinuar"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

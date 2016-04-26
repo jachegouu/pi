@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ray.jachegou.AdapterListView;
+import com.example.ray.jachegou.MODELS.CategoriaBean;
+import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
 
@@ -81,7 +83,7 @@ public class WebServiceTelaPrincipal {
                     super.onPostExecute(s);
                     Log.i("JSON", s);
                     if(s!=null) {
-                        ArrayAdapter<String> categorias=new ArrayAdapter<String>(activity,android.R.layout.simple_list_item_1,getCategoriasJson(s));
+                        ArrayAdapter<CategoriaBean> categorias=new ArrayAdapter<CategoriaBean>(activity,android.R.layout.simple_list_item_1,getCategoriasJson(s));
                         categoriasAutoComplete.setAdapter(categorias);
                         categoriasAutoComplete.setThreshold(2);
                         //loading.dismiss();
@@ -126,7 +128,7 @@ public class WebServiceTelaPrincipal {
                 super.onPostExecute(s);
                 Log.i("JSON", s);
                 if(s!=null) {
-                    ArrayAdapter<String> ets=new ArrayAdapter<String>(activity,android.R.layout.simple_list_item_1,getEstabelecimentosJson(s));
+                    ArrayAdapter<EstabelecimentoBean> ets=new ArrayAdapter<EstabelecimentoBean>(activity,android.R.layout.simple_list_item_1,getEstabelecimentosJson(s));
                     estabelecimentosAutoComplete.setAdapter(ets);
                     estabelecimentosAutoComplete.setThreshold(2);
                     loading.dismiss();
@@ -139,15 +141,18 @@ public class WebServiceTelaPrincipal {
         GetJSON gj = new GetJSON();
         gj.execute(URL_ESTABELECIMENTOS);
     }
-    private List<String> getCategoriasJson(String jsonString) {
-        List<String> categorias = new ArrayList<String>();
+    private List<CategoriaBean> getCategoriasJson(String jsonString) {
+        List<CategoriaBean> categorias = new ArrayList<CategoriaBean>();
         try {
             JSONArray pessoasJson = new JSONArray(jsonString);
             JSONObject object;
 
             for (int i = 0; i < pessoasJson.length(); i++) {
                 object = new JSONObject(pessoasJson.getString(i));
-                categorias.add(object.getString("descricao"));
+                CategoriaBean bean = new CategoriaBean();
+                bean.setId(object.getInt("id"));
+                bean.setDescricao(object.getString("descricao"));
+                categorias.add(bean);
             }
 
         } catch (JSONException e) {
@@ -155,15 +160,18 @@ public class WebServiceTelaPrincipal {
         }
         return categorias;
     }
-    private List<String> getEstabelecimentosJson(String jsonString) {
-        List<String> estabelecimentos = new ArrayList<String>();
+    private List<EstabelecimentoBean> getEstabelecimentosJson(String jsonString) {
+        List<EstabelecimentoBean> estabelecimentos = new ArrayList<EstabelecimentoBean>();
         try {
             JSONArray pessoasJson = new JSONArray(jsonString);
             JSONObject object;
 
             for (int i = 0; i < pessoasJson.length(); i++) {
                 object = new JSONObject(pessoasJson.getString(i));
-                estabelecimentos.add(object.getString("nome"));
+                EstabelecimentoBean bean= new EstabelecimentoBean();
+                bean.setId(object.getInt("id"));
+                bean.setDescricao(object.getString("nome"));
+                estabelecimentos.add(bean);
             }
 
         } catch (JSONException e) {

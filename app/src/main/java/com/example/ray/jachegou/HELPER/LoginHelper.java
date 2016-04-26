@@ -25,7 +25,7 @@ import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.LoginActivity;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.R;
-import com.example.ray.jachegou.TelaPrincipal;
+import com.example.ray.jachegou.TelaPrincipalControler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +85,7 @@ public class LoginHelper {
                             //Drawable drawable =LoadImageFromWebOperations("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + obj.getString("path_imagen"));
                             usuario.setBitmap(downloadImg("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + obj.getString("path_imagen")));
                             Log.e("URL:","http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + obj.getString("path_imagen"));
-                            Intent intent = new Intent(activity,TelaPrincipal.class);
+                            Intent intent = new Intent(activity,TelaPrincipalControler.class);
                             ItemStaticos.usuarioLogado=usuario;
                             activity.startActivity(intent);
                             activity.finish();

@@ -1,17 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#1874CD">
-
-    <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="5sp"
-        android:id="@+id/teste">
+        android:padding="5sp">
         <ImageView
             android:id="@+id/imagemview"
             android:layout_width="fill_parent"
@@ -53,5 +44,4 @@
             android:bottomRightRadius="10dp"
             android:topLeftRadius="10dp"
             android:topRightRadius="10dp"/>
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -15,8 +15,9 @@ import android.widget.Toast;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
-import com.example.ray.jachegou.TelaPrincipal;
+import com.example.ray.jachegou.TelaPrincipalControler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,13 +81,13 @@ public class WebServiceLogin {
                     loading.dismiss();
                     setJsonString(s);
                     Log.i("JSON",s);
-                    if(s!=null) {
-                        //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+                    if(s!=null && !s.equals("null") && !s.equals("") && s.length()>0) {
                         UsuarioBean usuario=getUsuarioJson(s);
                         ItemStaticos.usuarioLogado=usuario;
-                        abirTelaPrincipal();
+                        //Log.i("USUARIO",ItemStaticos.usuarioLogado.getNome());
+                        abriTelaPrincipal();
                     }else{
-                        Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "Usuario ou Senha Invalídos !", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -103,28 +104,32 @@ public class WebServiceLogin {
         this.jsonString = jsonString;
     }
 
-    public void abirTelaPrincipal(){
-        Intent intent= new Intent(activity, TelaPrincipal.class);
+    public void abriTelaPrincipal(){
+        Intent intent= new Intent(activity, TelaPrincipalControler.class);
         activity.startActivity(intent);
     }
 
     private UsuarioBean getUsuarioJson(String jsonString) {
         UsuarioBean bean=new UsuarioBean();
         try {
+            JSONArray pessoasJson = new JSONArray(jsonString);
 
-            JSONObject usuarioJson= new JSONObject(jsonString);
-            bean.setId(Integer.parseInt(usuarioJson.getString("id")));
-            bean.setNome(usuarioJson.getString("nome"));
-            bean.setTelefone(usuarioJson.getString("telefone"));
-            bean.setBairro(usuarioJson.getString("bairro"));
-            bean.setRua(usuarioJson.getString("rua"));
-            bean.setNumero(Integer.parseInt(usuarioJson.getString("numero")));
-            bean.setCep(usuarioJson.getString("cep"));
-            bean.setEmail(usuarioJson.getString("email"));
-            bean.setSenha(usuarioJson.getString("senha"));
 
-            bean.setImagem(carregarImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/imagem_cliente/"+usuarioJson.getString("path_imagen")));
-
+            for (int i = 0; i < pessoasJson.length(); i++) {
+                JSONObject usuarioJson =  new JSONObject(pessoasJson.getString(i));
+                bean.setId(Integer.parseInt(usuarioJson.getString("id")));
+                bean.setNome(usuarioJson.getString("nome"));
+                bean.setTelefone(usuarioJson.getString("telefone"));
+                bean.setBairro(usuarioJson.getString("bairro"));
+                bean.setRua(usuarioJson.getString("rua"));
+                bean.setNumero(Integer.parseInt(usuarioJson.getString("numero")));
+                bean.setCep(usuarioJson.getString("cep"));
+                bean.setEmail(usuarioJson.getString("email"));
+                bean.setSenha(usuarioJson.getString("senha"));
+                bean.setImagem(carregarImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + usuarioJson.getString("path_imagen")));
+                Log.i("USUARIO", usuarioJson.getString("nome"));
+                break;
+            }
         } catch (JSONException e) {
             Log.e("Erro", "Erro no parsing do JSON", e);
         }

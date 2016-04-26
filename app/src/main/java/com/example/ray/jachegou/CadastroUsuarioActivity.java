@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.android.volley.RequestQueue;
@@ -24,6 +25,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private Bitmap bitmap;
     static final int REQUEST_IMAGE_OPEN = 12;
     private FormularioUsuarioHelper helper;
+    private EditText editPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         btCancelar=(Button)findViewById(R.id.btCancelarUsuario);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         imagemUsuario=(ImageView)findViewById(R.id.cadastroFotoUsuario);
+        editPassword=(EditText)findViewById(R.id.senhaCliente);
         helper=new FormularioUsuarioHelper(this);
         if(ItemStaticos.usuarioLogado!=null){
             helper.setUsuario(ItemStaticos.usuarioLogado);
@@ -41,6 +44,14 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
                 helper.setBitmap(bitmap);
                 helper.salvar();
+            }
+        });
+        editPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ItemStaticos.usuarioLogado!=null){
+                    editPassword.setText("");
+                }
             }
         });
         imagemUsuario.setOnClickListener(new View.OnClickListener() {

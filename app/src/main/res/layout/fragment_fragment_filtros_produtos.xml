@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Produto:"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:layout_marginTop="40dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/produtoDescricao"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categoria:"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"/>
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/categoriaPesquisar"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estabelecimento:"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"/>
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="@android:color/white"
+                android:id="@+id/estabelecimentosEdit"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Valor até:"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:id="@+id/valorUm"
+                android:text="R$ 0,00"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"/>
+            <SeekBar
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarInicial"/>
+
+
+            <Button
+                android:layout_gravity="bottom"
+                android:id="@+id/btnConsultar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/lupa"
+                android:layout_marginTop="10dp"/>
+</LinearLayout>
+
+

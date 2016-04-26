@@ -1,5 +1,8 @@
 package com.example.ray.jachegou.HELPER;
 
+import android.content.Context;
+
+import com.example.ray.jachegou.MODELS.FiltroConsultaBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 
@@ -13,4 +16,6 @@ public class ItemStaticos {
     public static UsuarioBean usuarioLogado;
     public static ProdutoBean produtoTela;
     public static List<ProdutoBean> listaProdutosPedidos=new ArrayList<ProdutoBean>();
+    public static Context telaPrincipal;
+    public static FiltroConsultaBean filtro=new FiltroConsultaBean();
 }
