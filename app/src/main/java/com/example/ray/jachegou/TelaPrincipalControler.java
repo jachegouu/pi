@@ -1,6 +1,5 @@
 package com.example.ray.jachegou;
 
-import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -63,7 +62,7 @@ public class TelaPrincipalControler extends AppCompatActivity {
         //Adicionamos o primeiro fragmento no container
         //Aqui você pode selecionar qual tela será exebida inicialmente
         ItemStaticos.telaPrincipal=this;
-        Fragment squadFragment = new FragmentFiltrosProdutos();
+        Fragment squadFragment = new FiltrosFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.containerView,squadFragment,null);
         fragmentTransaction.commit();
@@ -88,7 +87,7 @@ public class TelaPrincipalControler extends AppCompatActivity {
         mainActivity.drawerLayout.closeDrawers();
         FragmentTransaction fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
 
-        Fragment TelaA = new FragmentFiltrosProdutos();
+        Fragment TelaA = new FiltrosFragment();
         fragmentTransaction.replace(R.id.containerView,TelaA);
         fragmentTransaction.commit();
     }

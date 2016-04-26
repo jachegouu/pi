@@ -1,10 +1,7 @@
 package com.example.ray.jachegou;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +48,7 @@ public class ProdutosLista extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProdutoBean item = (ProdutoBean)listView.getAdapter().getItem(position);
-                Intent intent=new Intent(getActivity(),InformacoesProduto.class);
+                Intent intent=new Intent(getActivity(),VizualizarProduto.class);
                 ItemStaticos.produtoTela=item;
                 startActivity(intent);
             }

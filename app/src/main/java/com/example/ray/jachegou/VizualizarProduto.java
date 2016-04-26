@@ -13,7 +13,7 @@ import com.example.ray.jachegou.MODELS.ProdutoBean;
 
 import java.text.NumberFormat;
 
-public class InformacoesProduto extends AppCompatActivity {
+public class VizualizarProduto extends AppCompatActivity {
     private TextView nomeProduto;
     private ImageView imagem;
     private TextView valor;
@@ -28,7 +28,7 @@ public class InformacoesProduto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informacoes_produto);
+        setContentView(R.layout.activity_vizualizar_produto);
 
         nomeProduto=(TextView)findViewById(R.id.nomeProdutoInf);
         imagem=(ImageView)findViewById(R.id.imagemViewInf);

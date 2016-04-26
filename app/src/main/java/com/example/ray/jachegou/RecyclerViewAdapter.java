@@ -70,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     this.context.startActivity(intent);
                     break;
                 case 2:
-                    Fragment TelaB = new FragmentFiltrosProdutos();
+                    Fragment TelaB = new FiltrosFragment();
                     fragmentTransaction.replace(R.id.containerView,TelaB);
                     fragmentTransaction.commit();
                     break;
@@ -83,7 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Toast.makeText(context,"Excluido com sucesso !",Toast.LENGTH_LONG).show();
                     break;
                 case 5:
-                    Intent intent2 = new Intent(this.context,LoginActivity.class);
+                    Intent intent2 = new Intent(this.context,TelaLogin.class);
                     this.context.startActivity(intent2);
                     break;
             }

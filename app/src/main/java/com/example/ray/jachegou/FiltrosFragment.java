@@ -28,7 +28,7 @@ import com.example.ray.jachegou.SERVICE.WebServiceTelaPrincipal;
 import java.text.NumberFormat;
 
 
-public class FragmentFiltrosProdutos extends Fragment {
+public class FiltrosFragment extends Fragment {
     private SeekBar seekUm;
     private TextView valorUm,valorDois;
     private Button btnConsultar;

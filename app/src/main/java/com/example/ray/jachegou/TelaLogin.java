@@ -1,17 +1,10 @@
 package com.example.ray.jachegou;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,31 +12,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.ray.jachegou.DAOS.Teste;
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.SERVICE.WebService;
 import com.example.ray.jachegou.SERVICE.WebServiceLogin;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class LoginActivity extends AppCompatActivity {
+public class TelaLogin extends AppCompatActivity {
 
     private EditText senhaEdit;
     private AutoCompleteTextView emailEdit;
@@ -87,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
+                Intent intent = new Intent(TelaLogin.this, CadastroUsuarioActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,10 +75,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 /*Teste teste= new Teste();
                 String retorno=teste.teste(requestQueue, emailEdit.getText().toString(), senhaEdit.getText().toString());
-                Toast.makeText(LoginActivity.this,retorno,Toast.LENGTH_LONG);*/
-                WebService teste= new WebService(LoginActivity.this);
+                Toast.makeText(TelaLogin.this,retorno,Toast.LENGTH_LONG);*/
+                WebService teste= new WebService(TelaLogin.this);
                 teste.getJSON("http://widehaus.com/android/android.json");
-                //Toast.makeText(LoginActivity.this,teste.getJsonString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(TelaLogin.this,teste.getJsonString(),Toast.LENGTH_LONG).show();
                 //Log.e("TESTE JSON",teste.getJsonString());
             }
         });
@@ -110,10 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                 if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
                         && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
                     //loginHelper.autenticarUsuario2();
-                    WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),LoginActivity.this);
+                    WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this);
                     login.logarUsuario();
                 }else{
-                    Toast.makeText(LoginActivity.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
                 }
             }
         });

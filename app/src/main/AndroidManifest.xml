@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".TelaLogin"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -31,13 +31,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".InformacoesProduto" />
-        <activity
-            android:name=".ListaProdutos"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_lista_produtos"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+        <activity android:name=".VizualizarProduto" />
         <activity android:name=".TelaPrincipalControler" />
         <activity android:name=".FinalizarPedido"></activity>
     </application>

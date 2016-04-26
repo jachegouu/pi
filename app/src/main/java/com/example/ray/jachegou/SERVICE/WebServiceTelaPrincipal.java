@@ -2,23 +2,14 @@ package com.example.ray.jachegou.SERVICE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ray.jachegou.AdapterListView;
 import com.example.ray.jachegou.MODELS.CategoriaBean;
 import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
-import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
 
 import org.json.JSONArray;
@@ -26,11 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

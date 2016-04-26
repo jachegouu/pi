@@ -11,6 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.ray.jachegou.MODELS.ProdutoBean;
+import com.example.ray.jachegou.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

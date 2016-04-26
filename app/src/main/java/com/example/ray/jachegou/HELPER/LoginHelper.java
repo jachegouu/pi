@@ -22,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
-import com.example.ray.jachegou.LoginActivity;
+import com.example.ray.jachegou.TelaLogin;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.R;
 import com.example.ray.jachegou.TelaPrincipalControler;
@@ -45,13 +45,13 @@ public class LoginHelper {
     private Button btnLogin;
     private AutoCompleteTextView email;
     private TextView senha;
-    private LoginActivity activity;
+    private TelaLogin activity;
     private String caminhoServidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/";
     private String loginUrl = caminhoServidor + "login.php";
     private UsuarioDAO dao;
     private ProgressDialog progress;
     private RequestQueue requestQueue;
-    public LoginHelper(LoginActivity activity){
+    public LoginHelper(TelaLogin activity){
         email=(AutoCompleteTextView)activity.findViewById(R.id.email);
         senha=(TextView)activity.findViewById(R.id.EditSenha);
         btnLogin=(Button)activity.findViewById(R.id.logar);
