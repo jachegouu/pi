@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="400dp"
-            android:maxHeight="400dp"
+            android:maxWidth="400dp"
             android:id="@+id/cadastroFotoUsuario"
             android:layout_marginTop="31dp"
             android:src="@drawable/icn_cliente"
@@ -37,8 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nomeCliente"
-            android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textSize="25dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +53,6 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/telefoneCliente"
-            android:textColor="@android:color/white"
             android:textSize="25dp" />
 
 
@@ -70,7 +68,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ruaEndereco"
-            android:textColor="@android:color/white"
             android:textSize="25dp" />
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +81,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bairroCliente"
-            android:textColor="@android:color/white"
             android:textSize="25dp"
             />
         <TextView
@@ -99,7 +95,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/numeroCliente"
-            android:textColor="@android:color/white"
             android:textSize="25dp"
             android:inputType="number"/>
         <TextView
@@ -113,7 +108,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cep"
-            android:textColor="@android:color/white"
             android:textSize="25dp"
             android:inputType="number"/>
 
@@ -131,7 +125,6 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailCliente"
-            android:textColor="@android:color/white"
             android:textSize="25dp" />
 
         <TextView
@@ -148,9 +141,7 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/senhaCliente"
-            android:textColor="@android:color/white"
             android:textSize="25dp" />
-
 
         <Button
             android:layout_width="fill_parent"

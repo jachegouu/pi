@@ -2,13 +2,14 @@
     <string name="app_name">Já Chegou</string>
 
     <!-- Strings related to login -->
+    <string name="ja_chegou">Já Chegou !!!</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_senha">Senha</string>
     <string name="entrar_registrar">Entrar ou Registrar</string>
     <string name="entrar_curto">Entrar</string>
-    <string name="error_email_invalido">Este e-mail é inválido</string>
-    <string name="error_senha_invalida">Esta senha é muito curta!</string>
-    <string name="error_senha_incorreta">Esta senha esta incorreta</string>
+    <string name="error_email_invalido"> e-mail é inválido</string>
+    <string name="error_senha_invalida"> senha é muito curta!</string>
+    <string name="error_senha_incorreta"> senha incorreta</string>
     <string name="error_campo_necessario">Este campo é obrigatorio</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="cadastar">Criar sua conta aqui !</string>
@@ -20,6 +21,7 @@
     <string name="endereco_cliente">Rua, Denominação, Referencia</string>
     <string name="save_cliente">Salvar</string>
     <string name="add_cliente">Adicionar Cliente</string>
+    <string name="teste">Teste de escrita</string>
 
     <string name="nome">Nome</string>
     <string name="telefone">Telefone</string>
