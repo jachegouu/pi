@@ -51,12 +51,14 @@
         <item>Alterar Meus Dados</item>
         <item>Utimos Pedidos</item>
         <item>Fechar Pedido</item>
+        <item>Excluir Itens Pedido</item>
         <item>Sair</item>
     </string-array>
 
     <string-array name="navDrawerIcons">
         <item>@drawable/item1</item>
         <item>@drawable/item2</item>
+        <item>@drawable/item3</item>
         <item>@drawable/item3</item>
         <item>@drawable/item4</item>
     </string-array>

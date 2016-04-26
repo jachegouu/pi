@@ -3,6 +3,7 @@ package com.example.ray.jachegou;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,8 +34,15 @@ public class FinalizarPedido extends AppCompatActivity {
         for(ProdutoBean produto:ItemStaticos.listaProdutosPedidos ){
             valor=valor+(produto.getValor()*produto.getQuantidadePedido());
         }
-        valorTotal.setText("VALOR TOTAL: "+ NumberFormat.getCurrencyInstance().format(valor));
+        valorTotal.setText("TOTAL: "+ NumberFormat.getCurrencyInstance().format(valor));
         listaView.setAdapter(adapterListView);
         listaView.setCacheColorHint(Color.TRANSPARENT);
+
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

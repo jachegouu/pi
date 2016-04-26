@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.ray.jachegou.HELPER.ItemStaticos;
+import com.example.ray.jachegou.MODELS.ProdutoBean;
+
+import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
@@ -73,6 +79,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     this.context.startActivity(intent3);
                     break;
                 case 4:
+                    ItemStaticos.listaProdutosPedidos=new ArrayList<ProdutoBean>();
+                    Toast.makeText(context,"Excluido com sucesso !",Toast.LENGTH_LONG).show();
+                    break;
+                case 5:
                     Intent intent2 = new Intent(this.context,LoginActivity.class);
                     this.context.startActivity(intent2);
                     break;
