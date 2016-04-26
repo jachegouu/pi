@@ -78,7 +78,7 @@ public class AdapterListView extends BaseAdapter {
         if(modelo==0) {
             ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getValor()));
         }else if(modelo==1){
-            ((TextView) view.findViewById(R.id.valor)).setText(NumberFormat.getCurrencyInstance().format(item.getQuantidadePedido() + " x "+item.getValor()));
+            ((TextView) view.findViewById(R.id.valor)).setText(item.getQuantidadePedido() + " x "+NumberFormat.getCurrencyInstance().format(item.getValor()));
         }
         ((ImageView) view.findViewById(R.id.imagemview)).setImageDrawable(item.getImagem());
 
