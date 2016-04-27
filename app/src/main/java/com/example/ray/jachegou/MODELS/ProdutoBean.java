@@ -14,6 +14,7 @@ public class ProdutoBean implements Serializable{
     private Double valor;
     private Drawable imagem;
     private Integer quantidadePedido;
+    private String ingredientes;
 
     public Integer getId() {
         return id;
@@ -62,5 +63,13 @@ public class ProdutoBean implements Serializable{
 
     public void setQuantidadePedido(Integer quantidadePedido) {
         this.quantidadePedido = quantidadePedido;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
     }
 }

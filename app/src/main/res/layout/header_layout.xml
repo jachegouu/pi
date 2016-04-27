@@ -12,7 +12,7 @@
         android:src="@drawable/icn_cliente"
         android:id="@+id/fotoUsuarioLogadoSistema"/>
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="RAY JOEL DUQUE"
         android:textAlignment="center"
@@ -20,4 +20,5 @@
         android:textStyle="bold"
         android:fontFamily="Timer New Rome"
         android:textColor="@android:color/white"/>
+
 </LinearLayout>

@@ -29,12 +29,12 @@ public class VizualizarPedido extends AppCompatActivity {
 
         listaView=(ListView)findViewById(R.id.listaViewPedidoAntigo);
         sair=(Button)findViewById(R.id.btnSairPedidoAntigo);
-        valorTotal=(TextView)findViewById(R.id.txValorTotalPedido);
+        valorTotal=(TextView)findViewById(R.id.totalPedidoAntigo);
 
         AdapterListView adapterListView = new AdapterListView(this.getApplicationContext(), ItemStaticos.pedido.getLista(),1);
 
         for(ProdutoBean produto:ItemStaticos.pedido.getLista()){
-            valor=valor+(produto.getValor()*produto.getQuantidadePedido());
+          valor=valor+(produto.getValor()*produto.getQuantidadePedido());
         }
 
         valorTotal.setText("TOTAL: "+ NumberFormat.getCurrencyInstance().format(valor));

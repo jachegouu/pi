@@ -28,7 +28,7 @@ public class ListaPedidosAntigo extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PedidoBean item = (PedidoBean)lista.getAdapter().getItem(position);
-                Intent intent=new Intent(ListaPedidosAntigo.this,VizualizarProduto.class);
+                Intent intent=new Intent(ListaPedidosAntigo.this,VizualizarPedido.class);
                 ItemStaticos.pedido=item;
                 startActivity(intent);
             }

@@ -25,6 +25,7 @@ public class VizualizarProduto extends AppCompatActivity {
     private TextView txtIngrediente;
     private Integer qts=0;
     private ProdutoBean produto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class VizualizarProduto extends AppCompatActivity {
         btnContinuar=(Button)findViewById(R.id.btnContinuar);
         btnFechar=(Button)findViewById(R.id.btnFechar);
         quantidade=(TextView)findViewById(R.id.qtsPedido);
-        //txtIngrediente=(TextView)findViewById(R.id.textIngredientes);
+        txtIngrediente=(TextView)findViewById(R.id.txtIngredientes);
 
         produto= ItemStaticos.produtoTela;
 
@@ -56,6 +57,7 @@ public class VizualizarProduto extends AppCompatActivity {
             nomeProduto.setText(produto.getDescricao());
             imagem.setImageDrawable(produto.getImagem());
             valor.setText(NumberFormat.getCurrencyInstance().format(produto.getValor()));
+            txtIngrediente.setText(produto.getIngredientes());
         }
 
         btnAumentar.setOnClickListener(new View.OnClickListener() {

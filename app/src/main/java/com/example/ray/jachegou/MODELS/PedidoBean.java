@@ -2,6 +2,7 @@ package com.example.ray.jachegou.MODELS;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 public class PedidoBean {
     private int id;
     private String dateTime;
-    private List<ProdutoBean> lista;
+    private List<ProdutoBean> lista= new ArrayList<ProdutoBean>();
 
     public int getId() {
         return id;

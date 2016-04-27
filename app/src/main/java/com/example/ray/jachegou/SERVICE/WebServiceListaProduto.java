@@ -167,6 +167,7 @@ public class WebServiceListaProduto {
                 produtoBean.setId(produtoJson.getInt("id"));
                 produtoBean.setDescricao(produtoJson.getString("descricao"));
                 produtoBean.setValor(produtoJson.getDouble("valor"));
+                produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
                 produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
                 Log.i("URL_IMAGEM:","http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
                 produtos.add(produtoBean);

@@ -66,7 +66,7 @@ public class WebServiceFazerPedido {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    loading = ProgressDialog.show(activity, "Enviando pedido ...", null);
+                    //loading = ProgressDialog.show(activity, "Enviando pedido ...", null);
                 }
 
                 @Override
@@ -94,7 +94,7 @@ public class WebServiceFazerPedido {
                     Log.i("JSON", s);
                     if(s!=null) {
                         //listaProdutos=getListaProdutos(s);
-                        loading.dismiss();
+                        //loading.dismiss();
                         Toast.makeText(activity,"Pedido Realizado com sucesso !",Toast.LENGTH_SHORT).show();
                         setQueringIsRuning(false);
                     }else{
@@ -142,12 +142,12 @@ public class WebServiceFazerPedido {
                 super.onPostExecute(s);
                 Log.i("JSON", s);
                 if(s!=null) {
-                    loading.dismiss();
                     List<PedidoBean> pedidos=getPedido(s);
                     //ArrayAdapter<PedidoBean> adapter = new ArrayAdapter<PedidoBean>(activity, android.R.layout.simple_list_item_1, pedidos);
                     AdapterListViewPedidosAnteriores adapter= new AdapterListViewPedidosAnteriores(activity,pedidos);
                     lista.setAdapter(adapter);
                     setQueringIsRuning(false);
+                    loading.dismiss();
                 }else{
                     Toast.makeText(activity, "Error no Servidor !", Toast.LENGTH_SHORT).show();
                 }
@@ -155,7 +155,8 @@ public class WebServiceFazerPedido {
         }
 
         GetJSON gj = new GetJSON();
-        gj.execute(url_Servidor2 + "?id="+ItemStaticos.usuarioLogado.getId());
+        Log.i("URL",url_Servidor2 + "?id=21");
+        gj.execute(url_Servidor2 + "?id=21");
         setQueringIsRuning(true);
     }
 
@@ -180,11 +181,13 @@ public class WebServiceFazerPedido {
                         e.printStackTrace();
                     }
                     pedido.setDateTime(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(date));
+                    ultimoid=produtoJson.getInt("id");
                 }
                 ProdutoBean item= new ProdutoBean();
                 item.setId(produtoJson.getInt("id_prd"));
                 item.setDescricao(produtoJson.getString("descricao"));
                 item.setValor(produtoJson.getDouble("valor_pago"));
+                item.setQuantidadePedido(produtoJson.getInt("quantidade"));
                 item.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
                 pedido.getLista().add(item);
                 pedidos.add(pedido);
