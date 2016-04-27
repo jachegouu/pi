@@ -70,9 +70,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     this.context.startActivity(intent);
                     break;
                 case 2:
-                    Fragment TelaB = new FiltrosFragment();
-                    fragmentTransaction.replace(R.id.containerView,TelaB);
-                    fragmentTransaction.commit();
+                    Intent intent4 = new Intent(this.context,ListaPedidosAntigo.class);
+                    this.context.startActivity(intent4);
                     break;
                 case 3:
                     Intent intent3 = new Intent(this.context,FinalizarPedido.class);
@@ -84,6 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     break;
                 case 5:
                     Intent intent2 = new Intent(this.context,TelaLogin.class);
+                    ItemStaticos.usuarioLogado=null;
                     this.context.startActivity(intent2);
                     break;
             }

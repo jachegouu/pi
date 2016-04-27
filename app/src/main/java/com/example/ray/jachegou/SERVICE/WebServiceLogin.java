@@ -33,12 +33,9 @@ import java.net.URL;
  * Created by Ray-PC on 15/04/2016.
  */
 public class WebServiceLogin {
-        private Button buttonGet;
-        private Button buttonParse;
         private Activity activity;
         private String jsonString;
 
-        private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/login.php";
 
         public WebServiceLogin(String email, String senha,Activity activity){
@@ -84,14 +81,13 @@ public class WebServiceLogin {
                     if(s!=null && !s.equals("null") && !s.equals("") && s.length()>0) {
                         UsuarioBean usuario=getUsuarioJson(s);
                         ItemStaticos.usuarioLogado=usuario;
-                        //Log.i("USUARIO",ItemStaticos.usuarioLogado.getNome());
                         abriTelaPrincipal();
                     }else{
                         Toast.makeText(activity, "Usuario ou Senha Invalídos !", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
-
+            Log.i("URl",url_Servidor);
             GetJSON gj = new GetJSON();
             gj.execute(url_Servidor);
         }

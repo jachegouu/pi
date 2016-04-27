@@ -1,5 +1,6 @@
 package com.example.ray.jachegou;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
+import com.example.ray.jachegou.SERVICE.WebServiceFazerPedido;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FinalizarPedido extends AppCompatActivity {
     private ListView listaView;
@@ -19,6 +23,7 @@ public class FinalizarPedido extends AppCompatActivity {
     private Button cancelar;
     private TextView valorTotal;
     private Double valor=0.0;
+    private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +33,7 @@ public class FinalizarPedido extends AppCompatActivity {
         finalizar=(Button)findViewById(R.id.btnFinalizar);
         cancelar=(Button)findViewById(R.id.btnCancelarPedido);
         valorTotal=(TextView)findViewById(R.id.txValorTotalPedido);
-
+        activity=this;
         AdapterListView adapterListView = new AdapterListView(this.getApplicationContext(), ItemStaticos.listaProdutosPedidos,1);
 
         for(ProdutoBean produto:ItemStaticos.listaProdutosPedidos ){
@@ -41,6 +46,16 @@ public class FinalizarPedido extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        
+        finalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebServiceFazerPedido web= new WebServiceFazerPedido(activity);
+                web.adicionarPedido(ItemStaticos.listaProdutosPedidos);
+                ItemStaticos.listaProdutosPedidos=new ArrayList<ProdutoBean>();
                 finish();
             }
         });
