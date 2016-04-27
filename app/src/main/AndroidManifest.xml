@@ -43,7 +43,8 @@
             android:name=".FinalizarPedido"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".ListaPedidosAntigo"></activity>
+        <activity android:name=".ListaPedidosAntigo" />
+        <activity android:name=".VizualizarPedido"></activity>
     </application>
 
 </manifest>

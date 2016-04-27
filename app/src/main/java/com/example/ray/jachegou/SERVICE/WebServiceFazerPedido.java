@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.ray.jachegou.ADPATER.AdapterListViewPedidosAnteriores;
 import com.example.ray.jachegou.AdapterListView;
 import com.example.ray.jachegou.FinalizarPedido;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
@@ -143,7 +144,8 @@ public class WebServiceFazerPedido {
                 if(s!=null) {
                     loading.dismiss();
                     List<PedidoBean> pedidos=getPedido(s);
-                    ArrayAdapter<PedidoBean> adapter = new ArrayAdapter<PedidoBean>(activity, android.R.layout.simple_list_item_1, pedidos);
+                    //ArrayAdapter<PedidoBean> adapter = new ArrayAdapter<PedidoBean>(activity, android.R.layout.simple_list_item_1, pedidos);
+                    AdapterListViewPedidosAnteriores adapter= new AdapterListViewPedidosAnteriores(activity,pedidos);
                     lista.setAdapter(adapter);
                     setQueringIsRuning(false);
                 }else{
@@ -162,19 +164,29 @@ public class WebServiceFazerPedido {
         try {
             JSONArray pessoasJson = new JSONArray(jsonString);
             JSONObject produtoJson;
-
+            int ultimoid=0;
+            PedidoBean pedido=null;
             for (int i = 0; i < pessoasJson.length(); i++) {
                 produtoJson = new JSONObject(pessoasJson.getString(i));
-                PedidoBean pedido=new PedidoBean();
-                pedido.setId(produtoJson.getInt("id"));
-                SimpleDateFormat ft=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Date date=new Date();
-                try {
-                    date=ft.parse(produtoJson.getString("data_time"));
-                }catch (Exception e){
-                    e.printStackTrace();
+
+                if(ultimoid!=produtoJson.getInt("id")){
+                    pedido=new PedidoBean();
+                    pedido.setId(produtoJson.getInt("id"));
+                    SimpleDateFormat ft=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    Date date=new Date();
+                    try {
+                        date=ft.parse(produtoJson.getString("data_time"));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    pedido.setDateTime(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(date));
                 }
-                pedido.setDateTime(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(date));
+                ProdutoBean item= new ProdutoBean();
+                item.setId(produtoJson.getInt("id_prd"));
+                item.setDescricao(produtoJson.getString("descricao"));
+                item.setValor(produtoJson.getDouble("valor_pago"));
+                item.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
+                pedido.getLista().add(item);
                 pedidos.add(pedido);
             }
 
@@ -207,4 +219,40 @@ public class WebServiceFazerPedido {
     public void setQueringIsRuning(boolean queringIsRuning) {
         this.queringIsRuning = queringIsRuning;
     }
+    public Drawable carregarImagemProduto(String url) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL myfileurl =null;
+        Drawable imagem=null;
+        try{
+            myfileurl= new URL(url);
+
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
+        try{
+            HttpURLConnection conn= (HttpURLConnection)myfileurl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            int length = conn.getContentLength();
+            int[] bitmapData =new int[length];
+            byte[] bitmapData2 =new byte[length];
+            InputStream is = conn.getInputStream();
+            BitmapFactory.Options options = new BitmapFactory.Options();
+
+            Bitmap bmImg = BitmapFactory.decodeStream(is, null, options);
+            imagem= new BitmapDrawable(bmImg);;
+            return imagem;
+        }
+        catch(IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+//          Toast.makeText(PhotoRating.this, "Connection Problem. Try Again.", Toast.LENGTH_SHORT).show();
+            return imagem;
+        }
+    }
+
 }

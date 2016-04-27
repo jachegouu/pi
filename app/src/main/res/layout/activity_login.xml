@@ -67,7 +67,7 @@
                 android:singleLine="true"
                 android:textColor="@android:color/white"
                 android:textSize="25dp"
-                android:text="admin"/>
+                android:text="123"/>
 
             <TextView
                 android:layout_marginTop="5dp"
