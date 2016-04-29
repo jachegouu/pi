@@ -4,9 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,12 +33,9 @@ public class TelaLogin extends AppCompatActivity {
     private Button botaoLogar;
     private Button redinirSenha;
     private UsuarioBean usuarioLogar, ultimoUsuarioLogado;
-    private RequestQueue requestQueue;
     private UsuarioDAO usuarioDao;
-    private ProgressDialog progress;
-    String caminhoServidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/";
-    String loginUrl = caminhoServidor + "login.php";
     private LoginHelper loginHelper;
+    private CheckBox verSenha;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -49,6 +48,7 @@ public class TelaLogin extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         botaoCadastro = (Button) findViewById(R.id.cadastro);
         redinirSenha = (Button) findViewById(R.id.btNaoLembraSenha);
+        verSenha=(CheckBox)findViewById(R.id.chkMostrarSenha);
         usuarioDao = new UsuarioDAO(this);
         //ultimoUsuarioLogado = usuarioDao.pegarUltimoUsuarioLogado();
         botaoLogar=(Button)findViewById(R.id.logar);
@@ -60,7 +60,16 @@ public class TelaLogin extends AppCompatActivity {
             emailEdit.setText(ultimoUsuarioLogado.getEmail());
             senhaEdit.setText(ultimoUsuarioLogado.getSenha());
         }
-
+        verSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(verSenha.isChecked()) {
+                    senhaEdit.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else{
+                    senhaEdit.setInputType(129);
+                }
+            }
+        });
 
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
