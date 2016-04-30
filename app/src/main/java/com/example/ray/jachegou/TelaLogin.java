@@ -1,6 +1,5 @@
 package com.example.ray.jachegou;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,11 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
-import com.example.ray.jachegou.SERVICE.WebService;
 import com.example.ray.jachegou.SERVICE.WebServiceLogin;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -82,13 +79,7 @@ public class TelaLogin extends AppCompatActivity {
         redinirSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Teste teste= new Teste();
-                String retorno=teste.teste(requestQueue, emailEdit.getText().toString(), senhaEdit.getText().toString());
-                Toast.makeText(TelaLogin.this,retorno,Toast.LENGTH_LONG);*/
-                WebService teste= new WebService(TelaLogin.this);
-                teste.getJSON("http://widehaus.com/android/android.json");
-                //Toast.makeText(TelaLogin.this,teste.getJsonString(),Toast.LENGTH_LONG).show();
-                //Log.e("TESTE JSON",teste.getJsonString());
+                Toast.makeText(TelaLogin.this,"Em desenvolvimento !",Toast.LENGTH_LONG).show();
             }
         });
         botaoLogar.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +87,6 @@ public class TelaLogin extends AppCompatActivity {
             public void onClick(View v) {
                 if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
                         && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
-                    //loginHelper.autenticarUsuario2();
                     WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this);
                     login.logarUsuario();
                 }else{

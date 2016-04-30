@@ -9,8 +9,6 @@ import android.widget.ListView;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.PedidoBean;
-import com.example.ray.jachegou.MODELS.ProdutoBean;
-import com.example.ray.jachegou.SERVICE.WebService;
 import com.example.ray.jachegou.SERVICE.WebServiceFazerPedido;
 
 public class ListaPedidosAntigo extends AppCompatActivity {

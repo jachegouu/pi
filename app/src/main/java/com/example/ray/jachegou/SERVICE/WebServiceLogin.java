@@ -35,7 +35,7 @@ import java.net.URL;
 public class WebServiceLogin {
         private Activity activity;
         private String jsonString;
-
+        private UsuarioBean bean=new UsuarioBean();
         private static  String url_Servidor = "http://www.ceramicasantaclara.ind.br/jachegou/webservice/login.php";
 
         public WebServiceLogin(String email, String senha,Activity activity){
@@ -45,12 +45,11 @@ public class WebServiceLogin {
 
         public void logarUsuario() {
             class GetJSON extends AsyncTask<String, Void, String> {
-                ProgressDialog loading;
+                ProgressDialog loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
                 }
 
                 @Override
@@ -75,12 +74,12 @@ public class WebServiceLogin {
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
-                    loading.dismiss();
                     setJsonString(s);
                     Log.i("JSON",s);
                     if(s!=null && !s.equals("null") && !s.equals("") && s.length()>0) {
                         UsuarioBean usuario=getUsuarioJson(s);
                         ItemStaticos.usuarioLogado=usuario;
+                        loading.dismiss();
                         abriTelaPrincipal();
                     }else{
                         Toast.makeText(activity, "Usuario ou Senha Invalídos !", Toast.LENGTH_SHORT).show();
@@ -106,14 +105,14 @@ public class WebServiceLogin {
     }
 
     private UsuarioBean getUsuarioJson(String jsonString) {
-        UsuarioBean bean=new UsuarioBean();
+
         try {
             JSONArray pessoasJson = new JSONArray(jsonString);
 
 
             for (int i = 0; i < pessoasJson.length(); i++) {
                 JSONObject usuarioJson =  new JSONObject(pessoasJson.getString(i));
-                bean.setId(Integer.parseInt(usuarioJson.getString("id")));
+                bean.setId(usuarioJson.getInt("id"));
                 bean.setNome(usuarioJson.getString("nome"));
                 bean.setTelefone(usuarioJson.getString("telefone"));
                 bean.setBairro(usuarioJson.getString("bairro"));
@@ -123,6 +122,7 @@ public class WebServiceLogin {
                 bean.setEmail(usuarioJson.getString("email"));
                 bean.setSenha(usuarioJson.getString("senha"));
                 bean.setImagem(carregarImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + usuarioJson.getString("path_imagen")));
+                bean.setPathImagemAntiga(usuarioJson.getString("path_imagen"));
                 Log.i("USUARIO", usuarioJson.getString("nome"));
                 break;
             }
@@ -157,6 +157,7 @@ public class WebServiceLogin {
             BitmapFactory.Options options = new BitmapFactory.Options();
 
             Bitmap bmImg = BitmapFactory.decodeStream(is, null, options);
+            bean.setBitmap(bmImg);
             imagem= new BitmapDrawable(bmImg);;
             return imagem;
         }

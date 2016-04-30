@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class FormularioUsuarioHelper {
     private EditText emailUsuario;
     private EditText senhaUsuario;
     private ImageView imagem;
+    private String pathImagemAntiga="null";
     String caminhoPath="http://www.ceramicasantaclara.ind.br/jachegou/webservice/";
     String insertUrl = caminhoPath + "salvarUsuario.php";
     private ProgressDialog progress;
@@ -62,14 +64,15 @@ public class FormularioUsuarioHelper {
          telefoneUsuario.setText(usuario.getTelefone());
          bairroEndereco.setText(usuario.getBairro());
          ruaEndereco.setText(usuario.getRua());
-         //numeroEndereco.setText(usuario.getNumero().toString());
+         numeroEndereco.setText(usuario.getNumero().toString());
          cepEndereco.setText(usuario.getCep());
          emailUsuario.setText(usuario.getEmail());
-         senhaUsuario.setText(usuario.getSenha());
+
+         senhaUsuario.setText("**123456**");
+         pathImagemAntiga=usuario.getPathImagemAntiga();
          if (usuario.getPathImagem()!=null) {
             imagem.setImageBitmap(BitmapFactory.decodeFile(usuario.getPathImagem()));
-         }
-         if(usuario.getImagem()!=null){
+         }else if(usuario.getImagem()!=null){
              imagem.setImageDrawable(usuario.getImagem());
          }
     }
@@ -93,6 +96,7 @@ public class FormularioUsuarioHelper {
                 @Override
                 public void onResponse(String response) {
                     progress.cancel();
+                    Log.i("URL",response);
                     Toast.makeText(activity, "Cadastrado com sucesso !", Toast.LENGTH_LONG);
                     activity.finish();
                 }
@@ -110,7 +114,7 @@ public class FormularioUsuarioHelper {
                     if(ItemStaticos.usuarioLogado==null){
                         parameters.put("id", "0");
                     }else{
-                        parameters.put("id", getUsuario().getId().toString());
+                        parameters.put("id", ItemStaticos.usuarioLogado.getId().toString());
                     }
 
                     parameters.put("nome", nomeUsuario.getText().toString());
@@ -122,6 +126,7 @@ public class FormularioUsuarioHelper {
                     parameters.put("senha", senhaUsuario.getText().toString());
                     parameters.put("email", emailUsuario.getText().toString());
                     parameters.put("imagem", BitMapToString(getBitmap()));
+                    parameters.put("path_imagem",pathImagemAntiga);
                     return parameters;
                 }
             };
@@ -162,29 +167,32 @@ public class FormularioUsuarioHelper {
         emailUsuario=(EditText)activity.findViewById(R.id.emailCliente);
         senhaUsuario=(EditText)activity.findViewById(R.id.senhaCliente);
 
-        if(nomeUsuario.getText()==null || nomeUsuario.getText().equals("")){
+        if(nomeUsuario.getText().toString()==null || nomeUsuario.getText().toString().equals("")){
             visualizaMensagem("Campo Nome Invalido, verifique !");
             return false;
-        }else if(telefoneUsuario.getText()==null || telefoneUsuario.getText().equals("")) {
+        }else if(telefoneUsuario.getText().toString()==null || telefoneUsuario.getText().toString().equals("")) {
             visualizaMensagem("Campo telefone Invalido, verifique !");
             return false;
-        }else if(bairroEndereco.getText()==null || bairroEndereco.getText().equals("")) {
+        }else if(bairroEndereco.getText().toString()==null || bairroEndereco.getText().toString().equals("")) {
             visualizaMensagem("Campo bairro Invalido, verifique !");
             return false;
-        }else if(ruaEndereco.getText()==null || ruaEndereco.getText().equals("")) {
+        }else if(ruaEndereco.getText().toString()==null || ruaEndereco.getText().toString().equals("")) {
             visualizaMensagem("Campo Rua Invalido, verifique !");
             return false;
-        }else if(numeroEndereco.getText()==null || numeroEndereco.getText().equals("")) {
+        }else if(numeroEndereco.getText().toString()==null || numeroEndereco.getText().toString().equals("")) {
             visualizaMensagem("Campo Endereço Invalido, verifique !");
             return false;
-        }else if(cepEndereco.getText()==null || cepEndereco.getText().equals("")) {
+        }else if(cepEndereco.getText().toString()==null || cepEndereco.getText().toString().equals("")) {
             visualizaMensagem("Campo CEP Invalido, verifique !");
             return false;
-        }else if(emailUsuario.getText()==null || emailUsuario.getText().equals("")) {
+        }else if(emailUsuario.getText().toString()==null || emailUsuario.getText().toString().equals("")) {
             visualizaMensagem("Campo e-mail Invalido, verifique !");
             return false;
-        }else if(senhaUsuario.getText()==null || senhaUsuario.getText().equals("")) {
+        }else if(senhaUsuario.getText().toString()==null || senhaUsuario.getText().toString().equals("")) {
             visualizaMensagem("Campo senha Invalido, verifique !");
+            return false;
+        }else if(bitmap==null) {
+            visualizaMensagem("Por Favor coloque uma foto !");
             return false;
         }else {
             return true;

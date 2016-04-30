@@ -19,6 +19,7 @@
             android:layout_width="fill_parent"
             android:layout_height="400dp"
             android:maxWidth="400dp"
+            android:maxHeight="400dp"
             android:id="@+id/cadastroFotoUsuario"
             android:layout_marginTop="31dp"
             android:src="@drawable/icn_cliente"
@@ -37,7 +38,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nomeCliente"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,7 +55,8 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/telefoneCliente"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
 
         <TextView
@@ -68,20 +71,23 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ruaEndereco"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bairro"
             android:id="@+id/tv6"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            />
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bairroCliente"
             android:textSize="25dp"
+            android:textColor="@android:color/white"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +102,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/numeroCliente"
             android:textSize="25dp"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:textColor="@android:color/white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,7 +116,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/cep"
             android:textSize="25dp"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,7 +133,8 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/emailCliente"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,7 +150,15 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/senhaCliente"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
+        <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Mostrar Senha"
+            android:textSize="22dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/chkMostrarSenha"/>
 
         <Button
             android:layout_width="fill_parent"
@@ -152,9 +169,7 @@
             android:background="#1874CD"
             android:textColor="@android:color/white"
             android:textSize="20dp"/>
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -163,7 +178,8 @@
             android:textStyle="bold"
             android:background="#1874CD"
             android:textColor="@android:color/white"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:layout_marginTop="15dp"/>
     </LinearLayout>
 
 </ScrollView>
