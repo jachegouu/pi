@@ -46,7 +46,6 @@ public class WebServiceLogin {
         public void logarUsuario() {
             class GetJSON extends AsyncTask<String, Void, String> {
                 ProgressDialog loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
-
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();

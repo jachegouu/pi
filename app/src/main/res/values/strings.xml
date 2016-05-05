@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Já Chegou</string>
+    <string name="app_name"></string>
 
     <!-- Strings related to login -->
     <string name="ja_chegou">Já Chegou !!!</string>
@@ -61,8 +61,8 @@
         <item>@drawable/item1</item>
         <item>@drawable/item2</item>
         <item>@drawable/item3</item>
-        <item>@drawable/item3</item>
         <item>@drawable/item4</item>
+        <item>@drawable/item5</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="178dp"
+    android:background="@android:color/holo_blue_dark"
     android:orientation="vertical"
-    android:paddingBottom="3dp"
-    android:layout_width="290dp"
-    android:layout_height="wrap_content"
-    android:background="@android:color/holo_blue_dark">
+    android:weightSum="1">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/icn_cliente"
-        android:id="@+id/fotoUsuarioLogadoSistema"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RAY JOEL DUQUE"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:fontFamily="Timer New Rome"
-        android:textColor="@android:color/white"/>
+        android:id="@+id/fotoUsuarioLogadoSistema"
+        />
 
-</LinearLayout>
+
+            <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+            android:text="Ray Joel Duque"
+            android:textSize="22sp"
+            android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/fotoUsuarioLogadoSistema"
+                android:layout_toEndOf="@+id/fotoUsuarioLogadoSistema" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="rayjoou@gmail.com"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            android:layout_below="@+id/fotoUsuarioLogadoSistema"
+            android:layout_alignLeft="@+id/name"
+            android:layout_alignStart="@+id/name" />
+
+</RelativeLayout>

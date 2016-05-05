@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     tools:context="com.example.ray.jachegou.FinalizarPedido"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorAccent">
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="480dp"
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/totalPedidoAntigo"
         android:textSize="28dp"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/corTextViewUm"
         android:text="TOTAL: R$ 0,00"
         android:textAlignment="center"/>
     <Button
