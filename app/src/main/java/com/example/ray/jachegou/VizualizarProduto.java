@@ -1,5 +1,6 @@
 package com.example.ray.jachegou;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,9 +94,8 @@ public class VizualizarProduto extends AppCompatActivity {
         btnFechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(ProdutoBean b:ItemStaticos.listaProdutosPedidos){
-                    Log.i("PRODUTO:",b.getDescricao() + ""+b.getQuantidadePedido());
-                }
+                Intent intent = new Intent(VizualizarProduto.this,FinalizarPedido.class);
+                startActivity(intent);
             }
         });
 

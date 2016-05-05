@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ray.jachegou.DAOS.UsuarioDAO;
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.SERVICE.WebServiceLogin;
@@ -85,12 +86,14 @@ public class TelaLogin extends AppCompatActivity {
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
-                        && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
-                    WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this);
-                    login.logarUsuario();
-                }else{
-                    Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                if(ItemStaticos.estaConectadoNoWifiOu3G(TelaLogin.this)==true){
+                    if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
+                            && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
+                        WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this);
+                        login.logarUsuario();
+                    }else{
+                        Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

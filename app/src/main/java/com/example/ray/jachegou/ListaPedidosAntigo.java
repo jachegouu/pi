@@ -17,19 +17,22 @@ public class ListaPedidosAntigo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pedidos_antigo);
-        lista=(ListView)findViewById(R.id.listaPedidosAntigo);
 
-        WebServiceFazerPedido web= new WebServiceFazerPedido(this);
-        web.listarPedidos(lista);
+        if(ItemStaticos.estaConectadoNoWifiOu3G(ListaPedidosAntigo.this)==true) {
+            lista = (ListView) findViewById(R.id.listaPedidosAntigo);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PedidoBean item = (PedidoBean)lista.getAdapter().getItem(position);
-                Intent intent=new Intent(ListaPedidosAntigo.this,VizualizarPedido.class);
-                ItemStaticos.pedido=item;
-                startActivity(intent);
-            }
-        });
+            WebServiceFazerPedido web = new WebServiceFazerPedido(this);
+            web.listarPedidos(lista);
+
+            lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    PedidoBean item = (PedidoBean) lista.getAdapter().getItem(position);
+                    Intent intent = new Intent(ListaPedidosAntigo.this, VizualizarPedido.class);
+                    ItemStaticos.pedido = item;
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }

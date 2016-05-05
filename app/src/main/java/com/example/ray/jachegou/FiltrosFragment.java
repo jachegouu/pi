@@ -91,21 +91,21 @@ public class FiltrosFragment extends Fragment {
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(Fra.this, ListaProdutos.class);
-                //startActivity(intent);
-                TelaPrincipalControler mainActivity = (TelaPrincipalControler)ItemStaticos.telaPrincipal;
-                mainActivity.drawerLayout.closeDrawers();
-                FragmentTransaction fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
+                if(ItemStaticos.estaConectadoNoWifiOu3G(getActivity())==true) {
+                    TelaPrincipalControler mainActivity = (TelaPrincipalControler) ItemStaticos.telaPrincipal;
+                    mainActivity.drawerLayout.closeDrawers();
+                    FragmentTransaction fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
 
-                Fragment TelaA = new ProdutosLista();
+                    Fragment TelaA = new ProdutosLista();
 
-                ItemStaticos.filtro.setValor(valor);
-                ItemStaticos.filtro.setDescricaoCategoria(categoriaEdit.getText().toString());
-                ItemStaticos.filtro.setDescricaoEstabelecimento( estabelecimentoEdit.getText().toString());
-                ItemStaticos.filtro.setDescricaoProduto(descricaoProduto.getText().toString());
+                    ItemStaticos.filtro.setValor(valor);
+                    ItemStaticos.filtro.setDescricaoCategoria(categoriaEdit.getText().toString());
+                    ItemStaticos.filtro.setDescricaoEstabelecimento(estabelecimentoEdit.getText().toString());
+                    ItemStaticos.filtro.setDescricaoProduto(descricaoProduto.getText().toString());
 
-                fragmentTransaction.replace(R.id.containerView,TelaA);
-                fragmentTransaction.commit();
+                    fragmentTransaction.replace(R.id.containerView, TelaA);
+                    fragmentTransaction.commit();
+                }
             }
         });
 
