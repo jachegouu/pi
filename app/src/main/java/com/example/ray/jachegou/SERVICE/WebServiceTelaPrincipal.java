@@ -179,7 +179,7 @@ public class WebServiceTelaPrincipal {
         listarCategorias();
         listarEstabelecimentos();
         ItemStaticos.filtro=new FiltroConsultaBean();
-        String[] listItems = {"Selecione", "Maior Valor", "Menor Valor", "Mais Pedido"};
+        String[] listItems = {"Selecione", "Maior Valor", "Menor Valor"};
         combox.setAdapter(new ArrayAdapter(activity, R.layout.spinner_personalizar, listItems));
     }
 }

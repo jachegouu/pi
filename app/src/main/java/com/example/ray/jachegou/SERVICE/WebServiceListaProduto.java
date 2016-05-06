@@ -91,17 +91,18 @@ public class WebServiceListaProduto {
                         //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                         listaProdutos=getListaProdutos(s);
                         createListView();
-                        loading.dismiss();
                         setQueringIsRuning(false);
+                        loading.dismiss();
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
                     }
                 }
             }
 
             GetJSON gj = new GetJSON();
             Log.i("URL:", montarUrlPesquisa());
-            gj.execute(url_Servidor);
+            gj.execute(montarUrlPesquisa());
             setQueringIsRuning(true);
         }
     public void carregarMaisProdutos() {
@@ -141,10 +142,11 @@ public class WebServiceListaProduto {
                     //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                     List<ProdutoBean> lista=getListaProdutos(s);
                     adicionar(lista);
-                    loading.dismiss();
                     setQueringIsRuning(false);
+                    loading.dismiss();
                 }else{
                     Toast.makeText(activity, "Error ao tentar adicionar produtos", Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
                 }
             }
         }
@@ -152,7 +154,7 @@ public class WebServiceListaProduto {
         GetJSON gj = new GetJSON();
         //Log.i("URL:",montarUrlPesquisa());
         montarUrlPesquisa();
-        gj.execute(url_Servidor);
+        gj.execute(montarUrlPesquisa());
         setQueringIsRuning(true);
     }
 
@@ -170,6 +172,7 @@ public class WebServiceListaProduto {
                     produtoBean.setDescricao(produtoJson.getString("descricao"));
                     produtoBean.setValor(produtoJson.getDouble("valor"));
                     produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
+
                     produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
                     Log.i("URL_IMAGEM:", "http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
                     produtos.add(produtoBean);
@@ -248,7 +251,7 @@ public class WebServiceListaProduto {
     }
 
     public String montarUrlPesquisa(){
-        return  url_Servidor=url_Servidor+
+        return  url_Servidor+
                 "?categoria="+((ItemStaticos.filtro.getDescricaoCategoria()==null)?0:ItemStaticos.filtro.getDescricaoCategoria())+
                 "&estabelicimento="+((ItemStaticos.filtro.getDescricaoEstabelecimento()==null)?0:ItemStaticos.filtro.getDescricaoEstabelecimento())+
                 "&valor="+((ItemStaticos.filtro.getValor()==null)?0.0:ItemStaticos.filtro.getValor())+

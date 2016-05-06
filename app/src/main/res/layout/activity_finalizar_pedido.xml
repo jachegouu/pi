@@ -6,7 +6,7 @@
     android:padding="5dp"
     tools:context="com.example.ray.jachegou.FinalizarPedido"
     android:orientation="vertical"
-    android:background="@color/colorAccent">
+    android:background="@color/corFundo">
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="410dp"

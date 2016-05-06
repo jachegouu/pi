@@ -11,5 +11,6 @@
     <color name="CorTres">#FFFFFF</color>
 
 
-    <color name="corTextViewUm">#104E8B</color>
+    <color name="corTextViewUm">#104e8b</color>
+    <color name="corFundo">#ffffff</color>
 </resources>
