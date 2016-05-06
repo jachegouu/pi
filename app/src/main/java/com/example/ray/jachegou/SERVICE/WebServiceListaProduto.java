@@ -43,7 +43,7 @@ public class WebServiceListaProduto {
         private ArrayList<ProdutoBean> itens;
         private List<ProdutoBean> listaProdutos;
         private boolean queringIsRuning=false;
-
+        private boolean acabouProdutos=false;
         private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
 
@@ -100,7 +100,7 @@ public class WebServiceListaProduto {
             }
 
             GetJSON gj = new GetJSON();
-            Log.i("URL:",montarUrlPesquisa());
+            Log.i("URL:", montarUrlPesquisa());
             gj.execute(url_Servidor);
             setQueringIsRuning(true);
         }
@@ -151,30 +151,35 @@ public class WebServiceListaProduto {
 
         GetJSON gj = new GetJSON();
         //Log.i("URL:",montarUrlPesquisa());
+        montarUrlPesquisa();
         gj.execute(url_Servidor);
         setQueringIsRuning(true);
     }
 
     private List<ProdutoBean> getListaProdutos(String jsonString) {
         List<ProdutoBean> produtos = new ArrayList<ProdutoBean>();
-        try {
-            JSONArray pessoasJson = new JSONArray(jsonString);
-            JSONObject produtoJson;
+        if(jsonString.length()>0) {
+            try {
+                JSONArray pessoasJson = new JSONArray(jsonString.trim());
+                JSONObject produtoJson;
 
-            for (int i = 0; i < pessoasJson.length(); i++) {
-                produtoJson = new JSONObject(pessoasJson.getString(i));
-                ProdutoBean produtoBean=new ProdutoBean();
-                produtoBean.setId(produtoJson.getInt("id"));
-                produtoBean.setDescricao(produtoJson.getString("descricao"));
-                produtoBean.setValor(produtoJson.getDouble("valor"));
-                produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
-                produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
-                Log.i("URL_IMAGEM:","http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
-                produtos.add(produtoBean);
+                for (int i = 0; i < pessoasJson.length(); i++) {
+                    produtoJson = new JSONObject(pessoasJson.getString(i));
+                    ProdutoBean produtoBean = new ProdutoBean();
+                    produtoBean.setId(produtoJson.getInt("id"));
+                    produtoBean.setDescricao(produtoJson.getString("descricao"));
+                    produtoBean.setValor(produtoJson.getDouble("valor"));
+                    produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
+                    produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
+                    Log.i("URL_IMAGEM:", "http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
+                    produtos.add(produtoBean);
+                }
+
+            } catch (JSONException e) {
+                Log.e("Erro", "Erro no parsing do JSON", e);
             }
-
-        } catch (JSONException e) {
-            Log.e("Erro", "Erro no parsing do JSON", e);
+        }else{
+            setAcabouProdutos(true);
         }
         return produtos;
     }
@@ -247,6 +252,14 @@ public class WebServiceListaProduto {
                 "?categoria="+((ItemStaticos.filtro.getDescricaoCategoria()==null)?0:ItemStaticos.filtro.getDescricaoCategoria())+
                 "&estabelicimento="+((ItemStaticos.filtro.getDescricaoEstabelecimento()==null)?0:ItemStaticos.filtro.getDescricaoEstabelecimento())+
                 "&valor="+((ItemStaticos.filtro.getValor()==null)?0.0:ItemStaticos.filtro.getValor())+
-                "&descricao="+ItemStaticos.filtro.getDescricaoProduto();
+                "&descricao="+ItemStaticos.filtro.getDescricaoProduto() +"&linha="+ItemStaticos.filtro.getLinhaAtual()+"&ordenar="+ItemStaticos.filtro.getOrdenar().replace("Selecione","");
+    }
+
+    public boolean isAcabouProdutos() {
+        return acabouProdutos;
+    }
+
+    public void setAcabouProdutos(boolean acabouProdutos) {
+        this.acabouProdutos = acabouProdutos;
     }
 }

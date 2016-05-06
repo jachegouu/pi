@@ -24,6 +24,8 @@ public class ProdutosLista extends Fragment {
     private ListView listView;
     private WebServiceListaProduto listar;
     private int qtsItenList;
+    private int linhaAtual=0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,9 @@ public class ProdutosLista extends Fragment {
             @Override
             public void onScroll(AbsListView view, int primeiroItemVisivel, int totalItemVisivel, int totalItem) {
                 if ((primeiroItemVisivel + totalItemVisivel) == totalItem) {
-                    if (listar.isQueringIsRuning() == false) {
+                    if (listar.isQueringIsRuning() == false && listar.isAcabouProdutos()==false) {
+                        linhaAtual=linhaAtual+7;
+                        ItemStaticos.filtro.setLinhaAtual(linhaAtual);
                         listar.carregarMaisProdutos();
                     }
                 }

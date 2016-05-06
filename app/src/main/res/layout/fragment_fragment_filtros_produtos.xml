@@ -7,6 +7,10 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +62,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
+                android:textSize="40dp"
                 android:id="@+id/valorUm"
                 android:text="R$ 0,00"
                 android:textColor="@color/corTextViewUm"
@@ -67,9 +71,23 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/seekBarInicial"/>
+                android:id="@+id/seekBarInicial"
+                android:thumb="@drawable/rsiflao"
+                android:backgroundTint="@android:color/black"
+                android:progressDrawable="@color/corTextViewUm"/>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ordenar Por :"
+                android:textSize="30dp"
+                android:textColor="@color/corTextViewUm"
+                android:textAlignment="center"/>
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ordenarSpiner">
+            </Spinner>
             <Button
                 android:layout_gravity="bottom"
                 android:id="@+id/btnConsultar"
@@ -77,11 +95,11 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/lupa"
-                android:layout_marginTop="10dp"
-                android:text="Consultar"
+                android:drawableTop="@drawable/lupa2"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/corTextViewUm"
                 android:textSize="25dp"/>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
 

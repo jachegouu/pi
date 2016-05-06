@@ -2,14 +2,20 @@ package com.example.ray.jachegou.SERVICE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.CategoriaBean;
 import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
+import com.example.ray.jachegou.MODELS.FiltroConsultaBean;
 import com.example.ray.jachegou.R;
 
 import org.json.JSONArray;
@@ -32,11 +38,13 @@ public class WebServiceTelaPrincipal {
         private static  String URL_ESTABELECIMENTOS = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarEstabelecimentos.php";
         private AutoCompleteTextView categoriasAutoComplete;
         private AutoCompleteTextView estabelecimentosAutoComplete;
+        private Spinner combox;
         private ProgressDialog loading;
         public WebServiceTelaPrincipal(Activity activity){
             this.activity=activity;
             categoriasAutoComplete=(AutoCompleteTextView)activity.findViewById(R.id.categoriaPesquisar);
             estabelecimentosAutoComplete=(AutoCompleteTextView)activity.findViewById(R.id.estabelecimentosEdit);
+            combox=(Spinner)activity.findViewById(R.id.ordenarSpiner);
         }
 
         public void listarCategorias() {
@@ -170,5 +178,8 @@ public class WebServiceTelaPrincipal {
     public  void CarregarTela(){
         listarCategorias();
         listarEstabelecimentos();
+        ItemStaticos.filtro=new FiltroConsultaBean();
+        String[] listItems = {"Selecione", "Maior Valor", "Menor Valor", "Mais Pedido"};
+        combox.setAdapter(new ArrayAdapter(activity, R.layout.spinner_personalizar, listItems));
     }
 }

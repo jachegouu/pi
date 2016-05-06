@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
@@ -39,6 +40,7 @@ public class FiltrosFragment extends Fragment {
     private ArrayAdapter<String> categorias;
     private EditText descricaoProduto;
     private Double valor=0.0;
+    private Spinner combox;
 
     @Nullable
     @Override
@@ -59,7 +61,7 @@ public class FiltrosFragment extends Fragment {
         descricaoProduto=(EditText)getView().findViewById(R.id.produtoDescricao);
         seekUm.setProgress(0);
         seekUm.setMax(100);
-
+        combox=(Spinner)getView().findViewById(R.id.ordenarSpiner);
         //nomeCliente=(TextView)findViewById(R.id.nomeTexviewCliente);
         //imagemCliente=(ImageView)findViewById(R.id.testeImageView);
 
@@ -102,7 +104,7 @@ public class FiltrosFragment extends Fragment {
                     ItemStaticos.filtro.setDescricaoCategoria(categoriaEdit.getText().toString());
                     ItemStaticos.filtro.setDescricaoEstabelecimento(estabelecimentoEdit.getText().toString());
                     ItemStaticos.filtro.setDescricaoProduto(descricaoProduto.getText().toString());
-
+                    ItemStaticos.filtro.setOrdenar(combox.getSelectedItem().toString());
                     fragmentTransaction.replace(R.id.containerView, TelaA);
                     fragmentTransaction.commit();
                 }
