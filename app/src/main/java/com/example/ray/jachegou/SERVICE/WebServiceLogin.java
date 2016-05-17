@@ -82,6 +82,7 @@ public class WebServiceLogin {
                         abriTelaPrincipal();
                     }else{
                         Toast.makeText(activity, "Usuario ou Senha Invalídos !", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
                     }
                 }
             }
@@ -89,6 +90,51 @@ public class WebServiceLogin {
             GetJSON gj = new GetJSON();
             gj.execute(url_Servidor);
         }
+
+    public void redefinirSenha(String email) {
+        class GetJSON extends AsyncTask<String, Void, String> {
+            ProgressDialog loading = ProgressDialog.show(activity, "Verificando credenciais ...", null);
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String uri = params[0];
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    bufferedReader = new BufferedReader((new InputStreamReader(con.getInputStream())));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if(s.equalsIgnoreCase("ok")) {
+                    Toast.makeText(activity, "Verifique seu e-mail !", Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                    abriTelaPrincipal();
+                }else{
+                    Toast.makeText(activity, "Erro interno !", Toast.LENGTH_SHORT).show();
+                    loading.dismiss();
+                }
+            }
+        }
+
+        GetJSON gj = new GetJSON();
+        gj.execute(""+email);
+    }
 
     public String getJsonString() {
         return jsonString;

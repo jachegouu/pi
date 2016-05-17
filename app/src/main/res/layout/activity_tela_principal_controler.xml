@@ -24,6 +24,7 @@
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             android:gravity="top"
+            android:titleTextColor="@color/corTextViewUm"
             />
 
     </LinearLayout>

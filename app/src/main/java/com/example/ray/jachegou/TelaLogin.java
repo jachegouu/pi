@@ -80,7 +80,8 @@ public class TelaLogin extends AppCompatActivity {
         redinirSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TelaLogin.this,"Em desenvolvimento !",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(TelaLogin.this, RedefinirSenha.class);
+                startActivity(intent);
             }
         });
         botaoLogar.setOnClickListener(new View.OnClickListener() {
