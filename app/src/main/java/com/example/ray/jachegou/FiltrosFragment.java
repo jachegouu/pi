@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.CategoriaBean;
@@ -41,6 +42,7 @@ public class FiltrosFragment extends Fragment {
     private EditText descricaoProduto;
     private Double valor=0.0;
     private Spinner combox;
+    private WebServiceTelaPrincipal tela;
 
     @Nullable
     @Override
@@ -93,7 +95,7 @@ public class FiltrosFragment extends Fragment {
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ItemStaticos.estaConectadoNoWifiOu3G(getActivity())==true) {
+                if(ItemStaticos.estaConectadoNoWifiOu3G(getActivity())==true && tela.selecionou(estabelecimentoEdit.getText().toString())!=null) {
                     TelaPrincipalControler mainActivity = (TelaPrincipalControler) ItemStaticos.telaPrincipal;
                     mainActivity.drawerLayout.closeDrawers();
                     FragmentTransaction fragmentTransaction = mainActivity.getSupportFragmentManager().beginTransaction();
@@ -107,11 +109,12 @@ public class FiltrosFragment extends Fragment {
                     ItemStaticos.filtro.setOrdenar(combox.getSelectedItem().toString());
                     fragmentTransaction.replace(R.id.containerView, TelaA);
                     fragmentTransaction.commit();
+                }else if(tela.selecionou(estabelecimentoEdit.getText().toString())==null){
+                    Toast.makeText(getActivity(),"Escolha um estabelecimento para fazer o pedido !",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        WebServiceTelaPrincipal tela=new WebServiceTelaPrincipal(this.getActivity());
+        tela=new WebServiceTelaPrincipal(this.getActivity());
         tela.CarregarTela();
     }
 }

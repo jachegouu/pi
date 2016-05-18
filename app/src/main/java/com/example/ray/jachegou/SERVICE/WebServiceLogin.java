@@ -168,6 +168,7 @@ public class WebServiceLogin {
                 bean.setSenha(usuarioJson.getString("senha"));
                 bean.setImagem(carregarImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + usuarioJson.getString("path_imagen")));
                 bean.setPathImagemAntiga(usuarioJson.getString("path_imagen"));
+                bean.setTipoUsuario(usuarioJson.getInt("tipo"));
                 Log.i("USUARIO", usuarioJson.getString("nome"));
                 break;
             }

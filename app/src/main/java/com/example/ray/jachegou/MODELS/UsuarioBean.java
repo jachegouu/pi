@@ -22,6 +22,7 @@ public class UsuarioBean implements Serializable {
     private Bitmap bitmap;
     private Drawable imagem;
     private String pathImagemAntiga;
+    private Integer tipoUsuario;
 
     public Integer getId() {
         return id;
@@ -125,5 +126,13 @@ public class UsuarioBean implements Serializable {
 
     public void setPathImagemAntiga(String pathImagemAntiga) {
         this.pathImagemAntiga = pathImagemAntiga;
+    }
+
+    public Integer getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(Integer tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 }

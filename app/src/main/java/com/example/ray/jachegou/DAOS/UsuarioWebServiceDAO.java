@@ -58,6 +58,7 @@ public class UsuarioWebServiceDAO extends Application{
                 parameters.put("senha",usuarioBean.getSenha());
                 parameters.put("email",usuarioBean.getEmail());
                 parameters.put("imagem", BitMapToString(usuarioBean.getBitmap()));
+                parameters.put("tipo", "1");
                 return parameters;
             }
         };

@@ -34,12 +34,13 @@ import java.util.List;
  */
 public class WebServiceTelaPrincipal {
         private Activity activity;
-        private static  String URL_CATEGORIAS = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarCategorias.php";
-        private static  String URL_ESTABELECIMENTOS = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarEstabelecimentos.php";
+        private String URL_CATEGORIAS = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarCategorias.php";
+        private String URL_ESTABELECIMENTOS = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarEstabelecimentos.php";
         private AutoCompleteTextView categoriasAutoComplete;
         private AutoCompleteTextView estabelecimentosAutoComplete;
         private Spinner combox;
         private ProgressDialog loading;
+        private List<EstabelecimentoBean> listaEstabelicimento;
         public WebServiceTelaPrincipal(Activity activity){
             this.activity=activity;
             categoriasAutoComplete=(AutoCompleteTextView)activity.findViewById(R.id.categoriaPesquisar);
@@ -124,7 +125,8 @@ public class WebServiceTelaPrincipal {
                 super.onPostExecute(s);
                 Log.i("JSON", s);
                 if(s!=null) {
-                    ArrayAdapter<EstabelecimentoBean> ets=new ArrayAdapter<EstabelecimentoBean>(activity,android.R.layout.simple_list_item_1,getEstabelecimentosJson(s));
+                    listaEstabelicimento=getEstabelecimentosJson(s);
+                    ArrayAdapter<EstabelecimentoBean> ets=new ArrayAdapter<EstabelecimentoBean>(activity,android.R.layout.simple_list_item_1,listaEstabelicimento);
                     estabelecimentosAutoComplete.setAdapter(ets);
                     estabelecimentosAutoComplete.setThreshold(2);
                     loading.dismiss();
@@ -181,5 +183,13 @@ public class WebServiceTelaPrincipal {
         ItemStaticos.filtro=new FiltroConsultaBean();
         String[] listItems = {"Selecione", "Maior Valor", "Menor Valor"};
         combox.setAdapter(new ArrayAdapter(activity, R.layout.spinner_personalizar, listItems));
+    }
+    public EstabelecimentoBean selecionou(String descricao){
+        for(EstabelecimentoBean bean:this.listaEstabelicimento){
+            if(bean.getDescricao().equals(descricao)){
+                return bean;
+            }
+        }
+        return null;
     }
 }
