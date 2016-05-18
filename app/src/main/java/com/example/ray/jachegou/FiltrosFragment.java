@@ -116,5 +116,10 @@ public class FiltrosFragment extends Fragment {
         });
         tela=new WebServiceTelaPrincipal(this.getActivity());
         tela.CarregarTela();
+        if(ItemStaticos.listaProdutosPedidos!=null && ItemStaticos.listaProdutosPedidos.size()>0){
+            estabelecimentoEdit.setEnabled(false);
+        }else{
+            estabelecimentoEdit.setEnabled(true);
+        }
     }
 }
