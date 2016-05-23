@@ -40,7 +40,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         editPassword=(EditText)findViewById(R.id.senhaCliente);
         helper=new FormularioUsuarioHelper(this);
         verSenha=(CheckBox)findViewById(R.id.chkMostrarSenha);
-
+        verSenha.setChecked(false);
         //Aki se usuario tiver logado, carrega pra ele conseguir alterar suas informações
         if(ItemStaticos.usuarioLogado!=null){
             helper.setUsuario(ItemStaticos.usuarioLogado);

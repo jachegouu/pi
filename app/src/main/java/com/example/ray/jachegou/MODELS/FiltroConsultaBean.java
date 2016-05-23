@@ -10,6 +10,7 @@ public class FiltroConsultaBean {
     private Double valor=0.0;
     private int linhaAtual=0;
     private String ordenar="";
+    private int idEstabelecimento=0;
 
     public String getDescricaoProduto() {
         return descricaoProduto;
@@ -57,5 +58,13 @@ public class FiltroConsultaBean {
 
     public void setOrdenar(String ordenar) {
         this.ordenar = ordenar;
+    }
+
+    public int getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(int idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 }

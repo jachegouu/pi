@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.TelaPrincipalControler;
@@ -77,6 +78,8 @@ public class WebServiceLogin {
                     Log.i("JSON",s);
                     if(s!=null && !s.equals("null") && !s.equals("") && s.length()>0) {
                         UsuarioBean usuario=getUsuarioJson(s);
+                        UsuarioDAO dao = new UsuarioDAO(activity);
+                        //dao.alterar(usuario);
                         ItemStaticos.usuarioLogado=usuario;
                         loading.dismiss();
                         abriTelaPrincipal();

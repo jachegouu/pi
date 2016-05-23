@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.ray.jachegou.AdapterListView;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
+import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
 
@@ -86,7 +87,6 @@ public class WebServiceListaProduto {
                 @Override
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
-                    Log.i("JSON", s);
                     if(s!=null) {
                         //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                         listaProdutos=getListaProdutos(s);
@@ -172,7 +172,9 @@ public class WebServiceListaProduto {
                     produtoBean.setDescricao(produtoJson.getString("descricao"));
                     produtoBean.setValor(produtoJson.getDouble("valor"));
                     produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
-
+                    EstabelecimentoBean estabelecimento= new EstabelecimentoBean();
+                    estabelecimento.setId(produtoJson.getInt("id_estabelecimento"));
+                    produtoBean.setEstabelecimento(estabelecimento);
                     produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
                     Log.i("URL_IMAGEM:", "http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
                     produtos.add(produtoBean);
@@ -253,7 +255,7 @@ public class WebServiceListaProduto {
     public String montarUrlPesquisa(){
         return  url_Servidor+
                 "?categoria="+((ItemStaticos.filtro.getDescricaoCategoria()==null)?0:ItemStaticos.filtro.getDescricaoCategoria())+
-                "&estabelicimento="+((ItemStaticos.filtro.getDescricaoEstabelecimento()==null)?0:ItemStaticos.filtro.getDescricaoEstabelecimento())+
+                "&estabelicimento="+ItemStaticos.filtro.getIdEstabelecimento()+
                 "&valor="+((ItemStaticos.filtro.getValor()==null)?0.0:ItemStaticos.filtro.getValor())+
                 "&descricao="+ItemStaticos.filtro.getDescricaoProduto() +"&linha="+ItemStaticos.filtro.getLinhaAtual()+"&ordenar="+ItemStaticos.filtro.getOrdenar().replace("Selecione","");
     }

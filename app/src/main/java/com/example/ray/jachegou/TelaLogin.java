@@ -53,7 +53,7 @@ public class TelaLogin extends AppCompatActivity {
         loginHelper=new LoginHelper(this);
         emailEdit=(AutoCompleteTextView)findViewById(R.id.email);
         senhaEdit=(EditText)findViewById(R.id.EditSenha);
-        
+        verSenha.setChecked(false);
         if (ultimoUsuarioLogado != null) {
             emailEdit.setText(ultimoUsuarioLogado.getEmail());
             senhaEdit.setText(ultimoUsuarioLogado.getSenha());
@@ -98,9 +98,6 @@ public class TelaLogin extends AppCompatActivity {
                 }
             }
         });
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
-
 
 }

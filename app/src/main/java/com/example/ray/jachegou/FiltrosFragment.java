@@ -104,7 +104,7 @@ public class FiltrosFragment extends Fragment {
 
                     ItemStaticos.filtro.setValor(valor);
                     ItemStaticos.filtro.setDescricaoCategoria(categoriaEdit.getText().toString());
-                    ItemStaticos.filtro.setDescricaoEstabelecimento(estabelecimentoEdit.getText().toString());
+                    ItemStaticos.filtro.setIdEstabelecimento(tela.selecionou(estabelecimentoEdit.getText().toString()).getId());
                     ItemStaticos.filtro.setDescricaoProduto(descricaoProduto.getText().toString());
                     ItemStaticos.filtro.setOrdenar(combox.getSelectedItem().toString());
                     fragmentTransaction.replace(R.id.containerView, TelaA);
@@ -122,4 +122,6 @@ public class FiltrosFragment extends Fragment {
             estabelecimentoEdit.setEnabled(true);
         }
     }
+
+
 }

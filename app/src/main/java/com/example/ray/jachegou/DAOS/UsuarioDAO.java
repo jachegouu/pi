@@ -26,7 +26,8 @@ public class UsuarioDAO extends SQLiteOpenHelper {
         String sql="CREATE TABLE "+ TABELA + " ( id INTEGER , "+
                 " email TEXT, senha TEXT );";
                 db.execSQL(sql);
-        Log.i(TAG, "Tabela Criada Com Sucesso: " + TABELA);
+            sql="insert into "+ TABELA + " (id,email,senha) values (1,admin,123456)";
+            db.execSQL(sql);
     }
 
     @Override
