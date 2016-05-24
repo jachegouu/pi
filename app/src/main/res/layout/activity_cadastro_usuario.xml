@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ray.jachegou.CadastroUsuarioActivity"
-    android:background="#104E8B">
+    android:background="@android:color/white">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,14 +32,14 @@
             android:id="@+id/tv1"
             android:layout_marginTop="35dp"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nomeCliente"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
             android:text="@string/telefone"
             android:id="@+id/tv2"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -56,7 +56,7 @@
             android:ems="10"
             android:id="@+id/telefoneCliente"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
 
         <TextView
@@ -65,21 +65,21 @@
             android:text="@string/rua"
             android:id="@+id/tv5"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ruaEndereco"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bairro"
             android:id="@+id/tv6"
             android:textSize="25dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/corBotoes"
             />
 
         <EditText
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bairroCliente"
             android:textSize="25dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/corBotoes"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -95,7 +95,7 @@
             android:text="@string/numero"
             android:id="@+id/tv7"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -103,21 +103,21 @@
             android:id="@+id/numeroCliente"
             android:textSize="25dp"
             android:inputType="number"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CEP :"
             android:id="@+id/tv8"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/cep"
             android:textSize="25dp"
             android:inputType="number"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
             android:text="@string/email"
             android:id="@+id/tv3"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -134,7 +134,7 @@
             android:ems="10"
             android:id="@+id/emailCliente"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,7 +142,7 @@
             android:text="Senha :"
             android:id="@+id/tv10"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -151,13 +151,13 @@
             android:ems="10"
             android:id="@+id/senhaCliente"
             android:textSize="25dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/corBotoes"/>
         <CheckBox
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Mostrar Senha"
             android:textSize="22dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/corBotoes"
             android:id="@+id/chkMostrarSenha"/>
 
         <Button
@@ -167,7 +167,7 @@
             android:id="@+id/btSavarUsuario"
             android:textStyle="bold"
             android:background="#1874CD"
-            android:textColor="@android:color/white"
+            android:textColor="@color/corBotoes"
             android:textSize="20dp"/>
 
         <Button
@@ -177,7 +177,7 @@
             android:id="@+id/btCancelarUsuario"
             android:textStyle="bold"
             android:background="#1874CD"
-            android:textColor="@android:color/white"
+            android:textColor="@color/corBotoes"
             android:textSize="20dp"
             android:layout_marginTop="15dp"/>
     </LinearLayout>

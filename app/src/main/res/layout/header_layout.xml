@@ -5,39 +5,29 @@
     android:background="@color/corTextViewUm"
     android:orientation="vertical"
     android:weightSum="1">
-
-    <ImageView
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageButton
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/icn_cliente"
         android:id="@+id/fotoUsuarioLogadoSistema"
-        />
+        android:adjustViewBounds="false"
+        android:background="@drawable/borda"/>
 
-
-            <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-            android:text="Ray Joel Duque"
-            android:textSize="22sp"
-            android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/fotoUsuarioLogadoSistema"
-                android:layout_toEndOf="@+id/fotoUsuarioLogadoSistema" />
-
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="rayjoou@gmail.com"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            android:layout_below="@+id/fotoUsuarioLogadoSistema"
-            android:layout_alignLeft="@+id/name"
-            android:layout_alignStart="@+id/name" />
-
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="Ray Joel Duque"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"/>
+</LinearLayout>
 </RelativeLayout>

@@ -36,13 +36,13 @@
             <ImageView
                 android:layout_marginTop="15dp"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="320dp"
                 android:id="@+id/logo"
                 android:src="@drawable/logo"
                 />
 
             <AutoCompleteTextView
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="24dp"
-                android:background="#104E8B" />
+                android:background="#2fabe5" />
 
             <Button
                 android:id="@+id/cadastro"
@@ -107,7 +107,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
-                android:background="@android:color/transparent"/>
+                android:background="#2fabe5"/>
             <Button
                 android:id="@+id/btNaoLembraSenha"
                 style="?android:textAppearanceSmall"
@@ -118,7 +118,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="20dp"
-                android:background="@android:color/transparent" />
+                android:background="#2fabe5" />
         </LinearLayout>
     </ScrollView>
 

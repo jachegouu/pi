@@ -24,7 +24,7 @@ public class TelaPrincipalControler extends AppCompatActivity {
     TypedArray navIcons;
     RecyclerView.Adapter recyclerViewAdapter;
     ActionBarDrawerToggle drawerToggle;
-    private ImageView img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,9 @@ public class TelaPrincipalControler extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.containerView,squadFragment,null);
         fragmentTransaction.commit();
+
+        //Setando informacoes usuario
+
 
     }
     void setupToolbar(){

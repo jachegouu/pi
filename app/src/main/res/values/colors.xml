@@ -9,8 +9,8 @@
     <color name="corUm">#2E2EFE</color>
     <color name="CorDois">#08088A</color>
     <color name="CorTres">#FFFFFF</color>
+    <color name="corBotoes">#2fabe5</color>
 
-
-    <color name="corTextViewUm">#104e8b</color>
+    <color name="corTextViewUm">#2fabe5</color>
     <color name="corFundo">#ffffff</color>
 </resources>

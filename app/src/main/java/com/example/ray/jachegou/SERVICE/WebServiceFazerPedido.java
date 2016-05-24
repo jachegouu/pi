@@ -2,6 +2,7 @@ package com.example.ray.jachegou.SERVICE;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.PedidoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
 import com.example.ray.jachegou.R;
+import com.example.ray.jachegou.VizualizarPedido;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -165,7 +167,7 @@ public class WebServiceFazerPedido {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(activity, "Carregando Informações !", null);
+                loading = ProgressDialog.show(activity, "Carregando Informações Pedido !", null);
             }
 
             @Override
@@ -190,19 +192,23 @@ public class WebServiceFazerPedido {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
-                Log.i("JSON", s);
+                Intent intent = new Intent(activity, VizualizarPedido.class);
                 if(s!=null) {
-                    pedido.setLista(jsonToItensPedido(s));
+                    ItemStaticos.pedido.setLista(jsonToItensPedido(s));
                     setQueringIsRuning(false);
                     loading.dismiss();
                 }else{
                     Toast.makeText(activity, "Error no Servidor !", Toast.LENGTH_SHORT).show();
+                    setQueringIsRuning(false);
+                    loading.dismiss();
                 }
+                activity.startActivity(intent);
             }
         }
 
         GetJSON gj = new GetJSON();
-        gj.execute(url_Servidor3 + "?id=21");
+        Log.i("URL",url_Servidor3 + "?id="+String.valueOf(pedido.getId()));
+        gj.execute(url_Servidor3 + "?id=" + String.valueOf(pedido.getId()));
         setQueringIsRuning(true);
     }
    private List<PedidoBean> getPedido(String jsonString) {

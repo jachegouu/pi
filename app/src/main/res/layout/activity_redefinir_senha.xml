@@ -43,6 +43,6 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="24dp"
-        android:background="#104E8B" />
+        android:background="#2fabe5" />
 
 </LinearLayout>

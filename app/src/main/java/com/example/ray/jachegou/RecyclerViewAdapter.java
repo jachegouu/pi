@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,6 +107,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         else if (viewType==0) {
             View itemHeader = layoutInflater.inflate(R.layout.header_layout,null);
+            ImageButton img = (ImageButton)itemHeader.findViewById(R.id.fotoUsuarioLogadoSistema);
+            TextView nome=(TextView)itemHeader.findViewById(R.id.name);
+            nome.setText(ItemStaticos.usuarioLogado.getNome());
+            img.setImageDrawable(ItemStaticos.usuarioLogado.getImagem());
+
             return new ViewHolder(itemHeader,viewType,context);
         }
 
