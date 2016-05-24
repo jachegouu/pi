@@ -11,6 +11,7 @@ import java.util.List;
 public class PedidoBean {
     private int id;
     private String dateTime;
+    private int status;
     private List<ProdutoBean> lista= new ArrayList<ProdutoBean>();
 
     public int getId() {
@@ -40,5 +41,27 @@ public class PedidoBean {
     @Override
     public String toString() {
         return ItemStaticos.usuarioLogado.getNome() + " | "+dateTime;
+    }
+
+    public String getStatus() {
+        if(this.status==0){
+            return "RECEBIDO";
+        }else if (this.status==1){
+            return "EM ANDAMENTO";
+        }else if (this.status==2){
+            return "CONCLUIDO";
+        }else if (this.status==3){
+            return "CANCELADO";
+        }else if (this.status==4){
+            return "SEM STATUS";
+        }else if (this.status==5){
+            return "SEM STATUS 2";
+        }else{
+            return "";
+        }
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

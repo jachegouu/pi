@@ -255,7 +255,7 @@ public class WebServiceListaProduto {
     public String montarUrlPesquisa(){
         return  url_Servidor+
                 "?categoria="+((ItemStaticos.filtro.getDescricaoCategoria()==null)?0:ItemStaticos.filtro.getDescricaoCategoria())+
-                "&estabelicimento="+ItemStaticos.filtro.getIdEstabelecimento()+
+                "&estabelicimento="+ItemStaticos.filtro.getEstabelecimento().getId().toString()+
                 "&valor="+((ItemStaticos.filtro.getValor()==null)?0.0:ItemStaticos.filtro.getValor())+
                 "&descricao="+ItemStaticos.filtro.getDescricaoProduto() +"&linha="+ItemStaticos.filtro.getLinhaAtual()+"&ordenar="+ItemStaticos.filtro.getOrdenar().replace("Selecione","");
     }

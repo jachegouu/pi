@@ -21,6 +21,7 @@ public class VizualizarProduto extends AppCompatActivity {
     private Button btnAumentar;
     private Button btnDiminuir;
     private Button btnFechar;
+    private Button btnCancelar;
     private Button btnContinuar;
     private TextView quantidade;
     private TextView txtIngrediente;
@@ -39,6 +40,7 @@ public class VizualizarProduto extends AppCompatActivity {
         btnDiminuir=(Button)findViewById(R.id.btnDiminuir);
         btnContinuar=(Button)findViewById(R.id.btnContinuar);
         btnFechar=(Button)findViewById(R.id.btnFechar);
+        btnCancelar=(Button)findViewById(R.id.btnCancelar);
         quantidade=(TextView)findViewById(R.id.qtsPedido);
         txtIngrediente=(TextView)findViewById(R.id.txtIngredientes);
 
@@ -94,8 +96,20 @@ public class VizualizarProduto extends AppCompatActivity {
         btnFechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(qts==0){
+                    ItemStaticos.listaProdutosPedidos.remove(produto);
+                }else{
+                    produto.setQuantidadePedido(qts);
+                    ItemStaticos.listaProdutosPedidos.add(produto);
+                }
                 Intent intent = new Intent(VizualizarProduto.this,FinalizarPedido.class);
                 startActivity(intent);
+            }
+        });
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

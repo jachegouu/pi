@@ -229,6 +229,7 @@ public class WebServiceFazerPedido {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    pedido.setStatus(produtoJson.getInt("status"));
                     pedidos.add(pedido);
             }
 

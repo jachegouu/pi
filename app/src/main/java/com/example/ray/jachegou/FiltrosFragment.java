@@ -1,44 +1,29 @@
 package com.example.ray.jachegou;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.ray.jachegou.HELPER.ItemStaticos;
-import com.example.ray.jachegou.MODELS.CategoriaBean;
-import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
 import com.example.ray.jachegou.SERVICE.WebServiceTelaPrincipal;
-
 import java.text.NumberFormat;
-
 
 public class FiltrosFragment extends Fragment {
     private SeekBar seekUm;
-    private TextView valorUm,valorDois;
+    private TextView valorUm;
     private Button btnConsultar;
-    private TextView nomeCliente;
-    private ImageView imagemCliente;
     private AutoCompleteTextView categoriaEdit;
     private AutoCompleteTextView estabelecimentoEdit;
-    private ArrayAdapter<String> categorias;
     private EditText descricaoProduto;
     private Double valor=0.0;
     private Spinner combox;
@@ -64,15 +49,6 @@ public class FiltrosFragment extends Fragment {
         seekUm.setProgress(0);
         seekUm.setMax(100);
         combox=(Spinner)getView().findViewById(R.id.ordenarSpiner);
-        //nomeCliente=(TextView)findViewById(R.id.nomeTexviewCliente);
-        //imagemCliente=(ImageView)findViewById(R.id.testeImageView);
-
-        if(ItemStaticos.usuarioLogado!=null){
-            //  nomeCliente.setText(ItemStaticos.usuarioLogado.getNome());
-            //imagemCliente.setImageDrawable(ItemStaticos.usuarioLogado.getImagem());
-            //imagemCliente.setImageBitmap(ItemStaticos.usuarioLogado.getBitmap());
-        }
-
 
         seekUm.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -104,7 +80,7 @@ public class FiltrosFragment extends Fragment {
 
                     ItemStaticos.filtro.setValor(valor);
                     ItemStaticos.filtro.setDescricaoCategoria(categoriaEdit.getText().toString());
-                    ItemStaticos.filtro.setIdEstabelecimento(tela.selecionou(estabelecimentoEdit.getText().toString()).getId());
+                    ItemStaticos.filtro.setEstabelecimento(tela.selecionou(estabelecimentoEdit.getText().toString()));
                     ItemStaticos.filtro.setDescricaoProduto(descricaoProduto.getText().toString());
                     ItemStaticos.filtro.setOrdenar(combox.getSelectedItem().toString());
                     fragmentTransaction.replace(R.id.containerView, TelaA);
@@ -118,6 +94,7 @@ public class FiltrosFragment extends Fragment {
         tela.CarregarTela();
         if(ItemStaticos.listaProdutosPedidos!=null && ItemStaticos.listaProdutosPedidos.size()>0){
             estabelecimentoEdit.setEnabled(false);
+            estabelecimentoEdit.setText(ItemStaticos.filtro.getEstabelecimento().getDescricao());
         }else{
             estabelecimentoEdit.setEnabled(true);
         }

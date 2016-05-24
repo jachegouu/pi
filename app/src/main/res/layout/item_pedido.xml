@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:background="@drawable/user"/>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="4"
-        android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textColor="@color/corTextViewUm"
-        android:textAlignment="center"
-        android:id="@+id/nomeItemPedido"/>
+    android:layout_height="match_parent"
+    android:padding="6dp">
     <ImageView
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -28,4 +16,17 @@
         android:textColor="@color/corTextViewUm"
         android:textAlignment="center"
         android:id="@+id/dataItemPedido"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:background="@drawable/inf"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="@color/corTextViewUm"
+        android:textAlignment="center"
+        android:id="@+id/statusPedido"/>
 </LinearLayout>
