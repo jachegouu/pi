@@ -58,7 +58,7 @@ public class AdapterListViewPedidosAnteriores extends BaseAdapter {
         //atravez do layout pego pelo LayoutInflater, pegamos cada id relacionado
         //ao item e definimos as informações.
 
-        ((TextView) view.findViewById(R.id.nomeItemPedido)).setText(ItemStaticos.usuarioLogado.getNome());
+        ((TextView) view.findViewById(R.id.dataItemPedido)).setText(item.getDateTime());
         ((TextView) view.findViewById(R.id.statusPedido)).setText(item.getStatus());
 
         return view;
