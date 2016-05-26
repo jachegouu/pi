@@ -36,13 +36,6 @@ public class FiltroConsultaBean {
         this.descricaoCategoria = descricaoCategoria;
     }
 
-    public String getDescricaoEstabelecimento() {
-        return descricaoEstabelecimento;
-    }
-
-    public void setDescricaoEstabelecimento(String descricaoEstabelecimento) {
-        this.descricaoEstabelecimento = descricaoEstabelecimento;
-    }
 
     public int getLinhaAtual() {
         return linhaAtual;

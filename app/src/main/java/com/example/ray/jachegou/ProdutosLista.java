@@ -10,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.ray.jachegou.HELPER.ItemStaticos;
@@ -25,6 +26,7 @@ public class ProdutosLista extends Fragment {
     private WebServiceListaProduto listar;
     private int qtsItenList;
     private int linhaAtual=0;
+    private ProgressBar loading;
 
 
     @Override
@@ -44,8 +46,10 @@ public class ProdutosLista extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         listView=(ListView)getActivity().findViewById(R.id.listaProdutosListView);
+        loading=(ProgressBar)getActivity().findViewById(R.id.login_progress);
         listar = new WebServiceListaProduto(this.getActivity());
         listar.listaProdutos();
+        
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

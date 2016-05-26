@@ -34,6 +34,7 @@ public class TelaLogin extends AppCompatActivity {
     private UsuarioDAO usuarioDao;
     private LoginHelper loginHelper;
     private CheckBox verSenha;
+    private ProgressBar spinnerLoading;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -54,6 +55,8 @@ public class TelaLogin extends AppCompatActivity {
         emailEdit=(AutoCompleteTextView)findViewById(R.id.email);
         senhaEdit=(EditText)findViewById(R.id.EditSenha);
         verSenha.setChecked(false);
+        spinnerLoading = (ProgressBar)findViewById(R.id.login_progress);
+
         if (ultimoUsuarioLogado != null) {
             emailEdit.setText(ultimoUsuarioLogado.getEmail());
             senhaEdit.setText(ultimoUsuarioLogado.getSenha());
@@ -90,7 +93,7 @@ public class TelaLogin extends AppCompatActivity {
                 if(ItemStaticos.estaConectadoNoWifiOu3G(TelaLogin.this)==true){
                     if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
                             && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
-                        WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this);
+                        WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this,spinnerLoading);
                         login.logarUsuario();
                     }else{
                         Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();

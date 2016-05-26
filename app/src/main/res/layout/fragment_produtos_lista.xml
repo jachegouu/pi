@@ -4,9 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listaProdutosListView">
-    </ListView>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:id="@+id/listaProdutosListView">
+            </ListView>
+            <ProgressBar
+                android:id="@+id/login_progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible"
+                android:progressTint="@color/corBotoes"
+                />
 </LinearLayout>

@@ -94,7 +94,7 @@ public class FiltrosFragment extends Fragment {
         tela.CarregarTela();
         if(ItemStaticos.listaProdutosPedidos!=null && ItemStaticos.listaProdutosPedidos.size()>0){
             estabelecimentoEdit.setEnabled(false);
-            estabelecimentoEdit.setText(ItemStaticos.filtro.getEstabelecimento().getDescricao());
+            estabelecimentoEdit.setText(ItemStaticos.listaProdutosPedidos.get(0).getEstabelecimento().getDescricao());
         }else{
             estabelecimentoEdit.setEnabled(true);
         }

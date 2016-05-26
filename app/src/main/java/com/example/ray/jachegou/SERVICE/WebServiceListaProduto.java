@@ -10,19 +10,23 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ray.jachegou.AdapterListView;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.EstabelecimentoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
+import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +34,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,31 +43,33 @@ import java.util.List;
  */
 public class WebServiceListaProduto {
         private Activity activity;
-        private String jsonString;
         private ListView listView;
         private AdapterListView adapterListView;
-        private ArrayList<ProdutoBean> itens;
         private List<ProdutoBean> listaProdutos;
+        private List<ProdutoBean> listaProdutosComImagens= new ArrayList<ProdutoBean>();
         private boolean queringIsRuning=false;
         private boolean acabouProdutos=false;
-        private static  String MY_JSON = "MY_JSON";
         private static  String url_Servidor = "http://ceramicasantaclara.ind.br/jachegou/webservice/listarProduto.php";
+        private int totalDownloadImg=0;
+        private int posicaoAtualDownload=1;
+        private ProgressBar loading;
 
 
         public WebServiceListaProduto(Activity activity){
-            url_Servidor=url_Servidor;
             this.activity=activity;
             listView=(ListView)activity.findViewById(R.id.listaProdutosListView);
+            this.loading=(ProgressBar)activity.findViewById(R.id.login_progress);
         }
 
         public void listaProdutos() {
             class GetJSON extends AsyncTask<String, Void, String> {
-                ProgressDialog loading;
+
 
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    loading = ProgressDialog.show(activity, "Consultando produtos ...", null);
+                    //loading = ProgressDialog.show(activity, "Consultando produtos ...", null);
+                    loading.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -88,14 +95,14 @@ public class WebServiceListaProduto {
                 protected void onPostExecute(String s) {
                     super.onPostExecute(s);
                     if(s!=null) {
-                        //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
                         listaProdutos=getListaProdutos(s);
-                        createListView();
-                        setQueringIsRuning(false);
-                        loading.dismiss();
+                        totalDownloadImg=listaProdutos.size();
+                        for (ProdutoBean p:listaProdutos){
+                            DonwnloadImagenAsyncProdutos(p);
+                        }
                     }else{
                         Toast.makeText(activity, "Error autentar logar", Toast.LENGTH_SHORT).show();
-                        loading.dismiss();
+                        loading.setVisibility(View.GONE);
                     }
                 }
             }
@@ -107,12 +114,10 @@ public class WebServiceListaProduto {
         }
     public void carregarMaisProdutos() {
         class GetJSON extends AsyncTask<String, Void, String> {
-            ProgressDialog loading;
-
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(activity, "Carregando mais produtos ...", null);
+                loading.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -139,20 +144,19 @@ public class WebServiceListaProduto {
                 super.onPostExecute(s);
                 Log.i("JSON", s);
                 if(s!=null) {
-                    //Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
-                    List<ProdutoBean> lista=getListaProdutos(s);
-                    adicionar(lista);
-                    setQueringIsRuning(false);
-                    loading.dismiss();
+                    List<ProdutoBean> listaNovos=getListaProdutos(s);
+                    totalDownloadImg=listaNovos.size();
+                    for (ProdutoBean p:listaNovos){
+                        DonwnloadImagenAsyncProdutosMais(p);
+                    }
                 }else{
                     Toast.makeText(activity, "Error ao tentar adicionar produtos", Toast.LENGTH_SHORT).show();
-                    loading.dismiss();
+                    loading.setVisibility(View.GONE);
                 }
             }
         }
 
         GetJSON gj = new GetJSON();
-        //Log.i("URL:",montarUrlPesquisa());
         montarUrlPesquisa();
         gj.execute(montarUrlPesquisa());
         setQueringIsRuning(true);
@@ -172,10 +176,8 @@ public class WebServiceListaProduto {
                     produtoBean.setDescricao(produtoJson.getString("descricao"));
                     produtoBean.setValor(produtoJson.getDouble("valor"));
                     produtoBean.setIngredientes(produtoJson.getString("ingredientes"));
-                    EstabelecimentoBean estabelecimento= new EstabelecimentoBean();
-                    estabelecimento.setId(produtoJson.getInt("id_estabelecimento"));
-                    produtoBean.setEstabelecimento(estabelecimento);
-                    produtoBean.setImagem(carregarImagemProduto("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen")));
+                    produtoBean.setEstabelecimento(ItemStaticos.filtro.getEstabelecimento());
+                    produtoBean.setPathImagem("http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
                     Log.i("URL_IMAGEM:", "http://ceramicasantaclara.ind.br/jachegou/site/" + produtoJson.getString("caminho_imagen"));
                     produtos.add(produtoBean);
                 }
@@ -199,41 +201,6 @@ public class WebServiceListaProduto {
             listaProdutos.add(p);
         }
         adapterListView.notifyDataSetChanged();
-    }
-    public Drawable carregarImagemProduto(String url) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL myfileurl =null;
-        Drawable imagem=null;
-        try{
-            myfileurl= new URL(url);
-
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }
-
-        try{
-            HttpURLConnection conn= (HttpURLConnection)myfileurl.openConnection();
-            conn.setDoInput(true);
-            conn.connect();
-            int length = conn.getContentLength();
-            int[] bitmapData =new int[length];
-            byte[] bitmapData2 =new byte[length];
-            InputStream is = conn.getInputStream();
-            BitmapFactory.Options options = new BitmapFactory.Options();
-
-            Bitmap bmImg = BitmapFactory.decodeStream(is, null, options);
-            imagem= new BitmapDrawable(bmImg);;
-            return imagem;
-        }
-        catch(IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-//          Toast.makeText(PhotoRating.this, "Connection Problem. Try Again.", Toast.LENGTH_SHORT).show();
-            return imagem;
-        }
     }
 
     public AdapterListView getAdapterListView() {
@@ -266,5 +233,109 @@ public class WebServiceListaProduto {
 
     public void setAcabouProdutos(boolean acabouProdutos) {
         this.acabouProdutos = acabouProdutos;
+    }
+
+    public void DonwnloadImagenAsyncProdutos(final ProdutoBean produto) {
+        class Down extends AsyncTask<String, Void, Bitmap> {
+
+            @Override
+            protected Bitmap doInBackground(String... urls) {
+                return download_Image(urls[0]);
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap result) {
+                Drawable img= new BitmapDrawable(result);
+                produto.setImagem(img);
+                listaProdutosComImagens.add(produto);
+                Log.i("URL",produto.getPathImagem()+"COMPLETED");
+                if(totalDownloadImg==posicaoAtualDownload){
+                    totalDownloadImg=0;
+                    posicaoAtualDownload=1;
+                    listaProdutos=listaProdutosComImagens;
+                    createListView();
+                    setQueringIsRuning(false);
+                    loading.setVisibility(View.GONE);
+                }else{
+                    posicaoAtualDownload=posicaoAtualDownload+1;
+                }
+            }
+
+
+            private Bitmap download_Image(String url) {
+                //---------------------------------------------------
+                Bitmap bm = null;
+                try {
+                    URL aURL = new URL(url);
+                    URLConnection conn = aURL.openConnection();
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    bm = BitmapFactory.decodeStream(bis);
+                    bis.close();
+                    is.close();
+                } catch (IOException e) {
+                    Log.e("Hub", "Error getting the image from server : " + e.getMessage().toString());
+                }
+                return bm;
+                //---------------------------------------------------
+            }
+
+
+        }
+        Down d = new Down();
+        d.execute(produto.getPathImagem());
+    }
+    public void DonwnloadImagenAsyncProdutosMais(final ProdutoBean produto) {
+        listaProdutosComImagens=new ArrayList<ProdutoBean>();
+        class Down extends AsyncTask<String, Void, Bitmap> {
+
+            @Override
+            protected Bitmap doInBackground(String... urls) {
+                return download_Image(urls[0]);
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap result) {
+                Drawable img= new BitmapDrawable(result);
+                produto.setImagem(img);
+                listaProdutosComImagens.add(produto);
+                Log.i("TESTE","TOtal:"+totalDownloadImg+"POsicao"+posicaoAtualDownload);
+                if(totalDownloadImg==posicaoAtualDownload){
+                    totalDownloadImg=0;
+                    posicaoAtualDownload=1;
+                    setQueringIsRuning(false);
+                    adicionar(listaProdutosComImagens);
+                    loading.setVisibility(View.GONE);
+                    Log.i("TESTE", "Download COmpleteed");
+                }else if(posicaoAtualDownload<totalDownloadImg){
+                    posicaoAtualDownload=posicaoAtualDownload+1;
+                }
+            }
+
+
+            private Bitmap download_Image(String url) {
+                //---------------------------------------------------
+                Bitmap bm = null;
+                try {
+                    URL aURL = new URL(url);
+                    URLConnection conn = aURL.openConnection();
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    bm = BitmapFactory.decodeStream(bis);
+                    bis.close();
+                    is.close();
+                } catch (IOException e) {
+                    Log.e("Hub", "Error getting the image from server : " + e.getMessage().toString());
+                }
+                return bm;
+                //---------------------------------------------------
+            }
+
+
+        }
+        Down d = new Down();
+        d.execute(produto.getPathImagem());
     }
 }
