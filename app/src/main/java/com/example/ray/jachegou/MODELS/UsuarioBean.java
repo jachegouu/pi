@@ -135,4 +135,7 @@ public class UsuarioBean implements Serializable {
     public void setTipoUsuario(Integer tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
     }
+    public String getEndereco(){
+        return this.rua+","+this.numero.toString()+","+this.getCep();
+    }
 }

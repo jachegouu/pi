@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.widget.Toast;
 
+import com.example.ray.jachegou.MODELS.EntregadorBean;
 import com.example.ray.jachegou.MODELS.FiltroConsultaBean;
 import com.example.ray.jachegou.MODELS.PedidoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 public class ItemStaticos {
     public static UsuarioBean usuarioLogado;
+    public static EntregadorBean entregador;
     public static PedidoBean pedido;
     public static ProdutoBean produtoTela;
     public static List<ProdutoBean> listaProdutosPedidos=new ArrayList<ProdutoBean>();

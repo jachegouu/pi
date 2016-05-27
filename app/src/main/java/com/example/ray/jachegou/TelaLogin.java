@@ -17,6 +17,7 @@ import com.example.ray.jachegou.DAOS.UsuarioDAO;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.HELPER.LoginHelper;
 import com.example.ray.jachegou.MODELS.UsuarioBean;
+import com.example.ray.jachegou.SERVICE.WebServiceEntregador;
 import com.example.ray.jachegou.SERVICE.WebServiceLogin;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -90,13 +91,26 @@ public class TelaLogin extends AppCompatActivity {
         botaoLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ItemStaticos.estaConectadoNoWifiOu3G(TelaLogin.this)==true){
-                    if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
-                            && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
-                        WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this,spinnerLoading);
-                        login.logarUsuario();
-                    }else{
-                        Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                if(emailEdit.getText().toString().substring(0,1).equals("@")){
+                    Toast.makeText(TelaLogin.this,"Entregador",Toast.LENGTH_SHORT).show();
+                    if(ItemStaticos.estaConectadoNoWifiOu3G(TelaLogin.this)==true){
+                        if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
+                                && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
+                            WebServiceEntregador login = new WebServiceEntregador(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this,spinnerLoading);
+                            login.logarUsuario();
+                        }else{
+                            Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }else{
+                    if(ItemStaticos.estaConectadoNoWifiOu3G(TelaLogin.this)==true){
+                        if(!emailEdit.getText().toString().equals("") && emailEdit.getText().toString()!=null
+                                && !senhaEdit.getText().toString().equals("") && senhaEdit.getText().toString()!=null) {
+                            WebServiceLogin login = new WebServiceLogin(emailEdit.getText().toString(),senhaEdit.getText().toString(),TelaLogin.this,spinnerLoading);
+                            login.logarUsuario();
+                        }else{
+                            Toast.makeText(TelaLogin.this,"Digite usuario e senha !",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }

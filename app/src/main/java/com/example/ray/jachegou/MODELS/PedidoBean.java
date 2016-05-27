@@ -13,6 +13,7 @@ public class PedidoBean {
     private String dateTime;
     private int status;
     private List<ProdutoBean> lista= new ArrayList<ProdutoBean>();
+    private UsuarioBean usuario= new UsuarioBean();
 
     public int getId() {
         return id;
@@ -40,7 +41,7 @@ public class PedidoBean {
 
     @Override
     public String toString() {
-        return ItemStaticos.usuarioLogado.getNome() + " | "+dateTime;
+        return usuario.getNome() + " | "+dateTime;
     }
 
     public String getStatus() {
@@ -63,5 +64,13 @@ public class PedidoBean {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public UsuarioBean getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioBean usuario) {
+        this.usuario = usuario;
     }
 }

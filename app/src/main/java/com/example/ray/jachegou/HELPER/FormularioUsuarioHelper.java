@@ -70,11 +70,12 @@ public class FormularioUsuarioHelper {
 
          senhaUsuario.setText("**123456**");
          pathImagemAntiga=usuario.getPathImagemAntiga();
-         if (usuario.getPathImagem()!=null) {
+         /*if (usuario.getPathImagem()!=null) {
             imagem.setImageBitmap(BitmapFactory.decodeFile(usuario.getPathImagem()));
          }else if(usuario.getImagem()!=null){
              imagem.setImageDrawable(usuario.getImagem());
-         }
+         }*/
+        imagem.setImageDrawable(usuario.getImagem());
     }
     public UsuarioBean getUsuario(){
         UsuarioBean usuario = new UsuarioBean();

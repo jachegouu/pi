@@ -23,12 +23,10 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private Button btSalvar,btCancelar;
     private RequestQueue requestQueue;
     private ImageView imagemUsuario;
-    private String caminhoImagem;
     private Bitmap bitmap;
     static final int REQUEST_IMAGE_OPEN = 12;
     private FormularioUsuarioHelper helper;
     private EditText editPassword;
-    private CheckBox verSenha;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,24 +37,12 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         imagemUsuario=(ImageView)findViewById(R.id.cadastroFotoUsuario);
         editPassword=(EditText)findViewById(R.id.senhaCliente);
         helper=new FormularioUsuarioHelper(this);
-        verSenha=(CheckBox)findViewById(R.id.chkMostrarSenha);
-        verSenha.setChecked(false);
         //Aki se usuario tiver logado, carrega pra ele conseguir alterar suas informações
         if(ItemStaticos.usuarioLogado!=null){
             helper.setUsuario(ItemStaticos.usuarioLogado);
             bitmap=ItemStaticos.usuarioLogado.getBitmap();
         }
 
-        verSenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(verSenha.isChecked() && !editPassword.getText().toString().equals("**123456**")) {
-                    editPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                }else{
-                    editPassword.setInputType(129);
-                }
-            }
-        });
 
         btSalvar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuLigar"
+        android:title="Ligar Para Cliente"/>
+    <item
+        android:id="@+id/menuSms"
+        android:title="Enviar Mensagem Cliente"/>
+    <item
+        android:id="@+id/menuWhatsapp"
+        android:title="Enviar Whatsap"/>
+    <item
+        android:id="@+id/menuMapa"
+        android:title="Abrir no Mapa"/>
+    <item
+        android:id="@+id/menuRota"
+        android:title="Traçar Rota Até Cliente"/>
+    <item
+        android:id="@+id/menuNavegar"
+        android:title="Entrega Realizada"/>
+</menu>

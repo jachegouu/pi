@@ -104,6 +104,7 @@ public class VizualizarProduto extends AppCompatActivity {
                 }
                 Intent intent = new Intent(VizualizarProduto.this,FinalizarPedido.class);
                 startActivity(intent);
+                finish();
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {

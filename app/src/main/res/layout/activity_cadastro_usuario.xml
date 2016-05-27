@@ -17,11 +17,11 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="200dp"
             android:maxWidth="400dp"
             android:maxHeight="400dp"
             android:id="@+id/cadastroFotoUsuario"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/icn_cliente"
             android:layout_gravity="center_horizontal" />
 
@@ -152,13 +152,22 @@
             android:id="@+id/senhaCliente"
             android:textSize="25dp"
             android:textColor="@color/corBotoes"/>
-        <CheckBox
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirme sua senha :"
+            android:id="@+id/tv16"
+            android:textSize="25dp"
+            android:textColor="@color/corBotoes"/>
+
+        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Mostrar Senha"
-            android:textSize="22dp"
-            android:textColor="@color/corBotoes"
-            android:id="@+id/chkMostrarSenha"/>
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/repetir"
+            android:textSize="25dp"
+            android:textColor="@color/corBotoes"/>
 
         <Button
             android:layout_width="fill_parent"

@@ -22,6 +22,7 @@ import com.example.ray.jachegou.FinalizarPedido;
 import com.example.ray.jachegou.HELPER.ItemStaticos;
 import com.example.ray.jachegou.MODELS.PedidoBean;
 import com.example.ray.jachegou.MODELS.ProdutoBean;
+import com.example.ray.jachegou.MODELS.UsuarioBean;
 import com.example.ray.jachegou.R;
 import com.example.ray.jachegou.VizualizarPedido;
 
@@ -160,6 +161,55 @@ public class WebServiceFazerPedido {
         gj.execute(url_Servidor2 + "?id=21");
         setQueringIsRuning(true);
     }
+    public void listarPedidosEntregador(final ListView lista) {
+        class GetJSON extends AsyncTask<String, Void, String> {
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(activity, "Consultando Pedidos à serem entregue !", null);
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String uri = params[0];
+                BufferedReader bufferedReader = null;
+                try {
+                    URL url = new URL(uri);
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    StringBuilder sb = new StringBuilder();
+                    bufferedReader = new BufferedReader((new InputStreamReader(con.getInputStream())));
+                    String json;
+                    while ((json = bufferedReader.readLine()) != null) {
+                        sb.append(json + "\n");
+                    }
+                    return sb.toString().trim();
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Log.i("JSON", s);
+                if(s!=null) {
+                    List<PedidoBean> pedidos=getPedidoToEntregador(s);
+                    ArrayAdapter<PedidoBean> arrayAdapter = new ArrayAdapter<PedidoBean>(activity,android.R.layout.simple_list_item_1, pedidos);
+                    lista.setAdapter(arrayAdapter);
+                    setQueringIsRuning(false);
+                    loading.dismiss();
+                }else{
+                    Toast.makeText(activity, "Error no Servidor !", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        GetJSON gj = new GetJSON();
+        gj.execute("http://www.ceramicasantaclara.ind.br/jachegou/webservice/listarPedidosEntregador.php?id="+ItemStaticos.entregador.getId());
+        setQueringIsRuning(true);
+    }
     public void getListaItensProdutos(final PedidoBean pedido) {
         class GetJSON extends AsyncTask<String, Void, String> {
             ProgressDialog loading;
@@ -233,6 +283,44 @@ public class WebServiceFazerPedido {
                     pedidos.add(pedido);
             }
 
+        } catch (JSONException e) {
+            Log.e("Erro", "Erro no parsing do JSON", e);
+        }
+        return pedidos;
+    }
+    private List<PedidoBean> getPedidoToEntregador(String jsonString) {
+        List<PedidoBean> pedidos = new ArrayList<PedidoBean>();
+        try {
+            JSONArray pessoasJson = new JSONArray(jsonString);
+            JSONObject produtoJson;
+
+            for (int i = 0; i < pessoasJson.length(); i++) {
+                produtoJson = new JSONObject(pessoasJson.getString(i));
+                PedidoBean pedido=new PedidoBean();
+                pedido.setId(produtoJson.getInt("id_pedido"));
+                SimpleDateFormat ft=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date date=new Date();
+                try {
+                    date=ft.parse(produtoJson.getString("data_time"));
+                    pedido.setDateTime(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(date));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                pedido.setStatus(produtoJson.getInt("status"));
+                UsuarioBean usuario = new UsuarioBean();
+                usuario.setId(produtoJson.getInt("id"));
+                usuario.setNome(produtoJson.getString("nome"));
+                usuario.setTelefone(produtoJson.getString("telefone"));
+                usuario.setBairro(produtoJson.getString("bairro"));
+                usuario.setRua(produtoJson.getString("rua"));
+                usuario.setNumero(Integer.parseInt(produtoJson.getString("numero")));
+                usuario.setCep(produtoJson.getString("cep"));
+                usuario.setEmail(produtoJson.getString("email"));
+                usuario.setSenha(produtoJson.getString("senha"));
+                usuario.setPathImagem("http://www.ceramicasantaclara.ind.br/jachegou/webservice/" + produtoJson.getString("path_imagen"));
+                pedido.setUsuario(usuario);
+                pedidos.add(pedido);
+            }
         } catch (JSONException e) {
             Log.e("Erro", "Erro no parsing do JSON", e);
         }
